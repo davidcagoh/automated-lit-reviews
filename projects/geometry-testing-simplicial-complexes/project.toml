@@ -1,0 +1,68 @@
+[project]
+name = "geometry-testing-simplicial-complexes"
+
+[seeds]
+# Accepts: arXiv IDs, DOIs, or title strings
+identifiers = [
+    "1411.5713",     # Bubeck, Ding, Eldan, Rácz (2016)
+    "2111.11316",    # Liu, Mohanty, Schramm, Yang (2022)
+    "2305.04802",    # Bangachev, Bresler — Random Algebraic Graphs and Their Convergence to Erdos-Renyi (RSA 2025)
+    "2402.12589",    # Bangachev, Bresler STOC 2024 (Fourier on sphere)
+    "1409.4734",     # Bobrowski, Kahle (2018) probabilistic topology survey
+]
+
+[criteria]
+v1 = """
+Include if the paper addresses any of:
+- Hypothesis testing / total variation distance for random geometric graphs or simplicial complexes
+- Detection/indistinguishability thresholds for latent geometry
+- Random simplicial complexes (Čech, Rips, flag complexes)
+- Low-degree polynomial lower bounds for geometric testing
+- Fourier analysis on groups applied to random graph models
+- Topological data analysis connected to geometry detection
+
+Exclude:
+- Papers on random geometric graphs without a testing/TV component
+- TDA papers with no connection to hypothesis testing
+- Planted structure detection (null is random hypergraph, not geometric)
+"""
+
+v2 = """
+Include if the paper addresses any of:
+- Hypothesis testing / total variation distance for random geometric graphs or simplicial complexes
+- Detection/indistinguishability thresholds for latent geometry (including high-dimensional and anisotropic settings)
+- Random simplicial complexes (Čech, Rips, flag complexes): topology, Betti numbers, persistence diagrams, homology
+- Low-degree polynomial lower bounds for geometric or subgraph-based testing
+- Fourier / spectral analysis on groups applied to random graph models
+- Topological data analysis connected to random geometry or geometry detection
+- Subgraph counting / small subgraph statistics as tests for network structure
+- Latent geometry recovery, embedding, or estimation from graph observations (latent position models, MDS-type, spectral methods for geometry)
+
+Exclude:
+- Random geometric graph papers with no testing, topology, or geometry recovery component
+- TDA papers with no connection to random geometry or hypothesis testing
+- Planted structure detection where the null is non-geometric (SBM, planted clique, planted dense cycles) — unless it explicitly connects to geometric models
+- Statistical physics / spin glass papers (cavity method, replica method) with no graph geometry connection
+- Pure complexity / proof complexity / CSP papers unrelated to geometric testing
+- Pure background reference material (textbooks, lecture notes) not specifically about random geometric graphs or random topology
+"""
+
+# ── Extraction: project-specific fields ──────────────────────────────────────
+# These are appended to the universal schema (contribution_type, problem_statement,
+# setting, methods, main_results, limitations, related_work_positioning, open_questions).
+
+[[extraction.extra_fields]]
+name = "theorems"
+description = "Names or statements of the main theorems, propositions, or lemmas proved. Return as a list. Null if the paper is empirical."
+
+[[extraction.extra_fields]]
+name = "proof_techniques"
+description = "Core proof techniques or mathematical tools used (e.g. 'Fourier analysis on S^{n-1}', 'second moment method', 'coupling argument', 'persistent homology'). Return as a list."
+
+[[extraction.extra_fields]]
+name = "statistical_regime"
+description = "The parameter regime studied (e.g. sparse/dense graph, dimension d vs n relationship, signal-to-noise threshold). Null if not applicable."
+
+[[extraction.extra_fields]]
+name = "complexity_bounds"
+description = "Computational or sample complexity bounds established, if any (e.g. 'O(n^2) time', 'n^{1/3} samples'). Null if none."

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "litreview"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "supabase>=2.4",
+    "pyalex>=0.13",
+    "semanticscholar>=0.8",
+    "python-dotenv>=1.0",
+    "rapidfuzz>=3.0",
+    "pydantic>=2.0",
+    "httpx>=0.27",
+    "tenacity>=8.0",
+    "typer>=0.12",
+    "rich>=13.0",
+    "anthropic>=0.30",
+    "pypdf>=4.0",
+]
+
+[project.scripts]
+litreview = "litreview.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["litreview"]
