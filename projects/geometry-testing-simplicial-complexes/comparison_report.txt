@@ -1,0 +1,120 @@
+
+======================================================================
+  SUMMARY
+======================================================================
+  Pipeline corpus         : 56 papers
+  Chat list (raw)         : 19 entries
+  Resolved in S2          : 16
+  Hallucinated / not found: 3
+
+  Overlap (both)          : 5
+  Pipeline-only (missed by chat)  : 51
+  Chat-only (missed by pipeline)  : 11
+
+======================================================================
+  HALLUCINATED / NOT FOUND IN S2 (3)
+======================================================================
+  - Detection of a latent geometry in random geometric graphs
+  - Beyond the signed triangle statistic: geometry detection via 4-cycles
+  - Detecting geometry in sparse random graphs using the Wasserstein distance
+
+======================================================================
+  OVERLAP — in both (5)
+======================================================================
+  ✓ Testing for high‐dimensional geometry in random graphs
+  ✓ Testing thresholds for high-dimensional sparse random geometric graphs
+  ✓ A probabilistic view of latent space graphs and phase transitions
+  ✓ Random Algebraic Graphs and Their Convergence to ErdőS–Rényi
+  ✓ Topology of random geometric complexes: a survey
+
+======================================================================
+  PIPELINE-ONLY — missed by chat (51)
+======================================================================
+  - (Bangachev & Bresler 2024) On the Fourier Coefficients of High-Dimensional Random Geometric   [depth=0, src=seed]
+  - (Decreusefond et al. 2014) Simplicial Homology of Random Configurations  [depth=1, src=citation]
+  - (Duy et al. 2016) Limit theorems for persistence diagrams  [depth=1, src=citation]
+  - (Gao & Lafferty 2017) Testing Network Structure Using Relations Between Small Subgraph   [depth=1, src=citation]
+  - (Galhotra et al. 2018) The Geometric Block Model  [depth=1, src=citation]
+  - (Škraba et al. 2020) Randomly Weighted $d$-Complexes: Minimal Spanning Acycles and Per  [depth=1, src=citation]
+  - (Bangachev & Bresler 2025) Sandwiching Random Geometric Graphs and Erdos-Renyi with Applicat  [depth=1, src=citation]
+  - (Delfinado & Edelsbrunner 1995) An incremental algorithm for Betti numbers of simplicial complexe  [depth=2, src=citation]
+  - (Linial & Meshulam 2006) Homological Connectivity Of Random 2-Complexes  [depth=2, src=citation]
+  - (Silva & Ghrist 2007) Coverage in sensor networks via persistent homology  [depth=2, src=citation]
+  - (Ghrist 2007) Barcodes: The persistent topology of data  [depth=2, src=citation]
+  - (Kahle 2008) Topology of random clique complexes  [depth=2, src=citation]
+  - (Bobrowski & Adler 2011) Distance Functions, Critical Points, and the Topology of Random \  [depth=2, src=citation]
+  - (Devroye et al. 2011) High-Dimensional Random Geometric Graphs and their Clique Number  [depth=2, src=citation]
+  - (Cohen et al. 2011) Topology of Random 2-Complexes  [depth=2, src=citation]
+  - (Niyogi et al. 2011) A Topological View of Unsupervised Learning from Noisy Data  [depth=2, src=citation]
+  - (Bubenik 2012) Statistical topological data analysis using persistence landscape  [depth=2, src=citation]
+  - (Bobrowski & Borman 2012) EULER INTEGRATION OF GAUSSIAN RANDOM FIELDS AND PERSISTENT HOMOLO  [depth=2, src=citation]
+  - (Kahle & Pittel 2013) Inside the critical window for cohomology of random k-complexes  [depth=2, src=citation]
+  - (Kahle & Meckes 2013) Limit theorems for Betti numbers of random simplicial complexes  [depth=2, src=citation]
+  - (Chazal et al. 2013) Persistence stability for geometric complexes  [depth=2, src=citation]
+  - (Sheehy 2013) Linear-Size Approximations to the Vietoris–Rips Filtration  [depth=2, src=citation]
+  - (Lachièze-Rey & Peccati 2013) Fine Gaussian fluctuations on the Poisson space, I: contractions,  [depth=2, src=citation]
+  - (Chazal et al. 2013) Persistence-Based Clustering in Riemannian Manifolds  [depth=2, src=citation]
+  - (Bobrowski & Adler 2014) Distance functions, critical points, and the topology of random Č  [depth=2, src=citation]
+  - (Chazal et al. 2014) Stochastic Convergence of Persistence Landscapes and Silhouettes  [depth=2, src=citation]
+  - (Sheehy 2014) The Persistent Homology of Distance Functions under Random Projec  [depth=2, src=citation]
+  - (Vergne et al. 2014) Homology based algorithm for disaster recovery in wireless networ  [depth=2, src=citation]
+  - (Fasy et al. 2014) Confidence sets for persistence diagrams  [depth=2, src=citation]
+  - (Bachmann 2015) Concentration for Poisson functionals: Component counts in random  [depth=2, src=citation]
+  - (Yogeshwaran & Adler 2015) On the topology of random complexes built over stationary point p  [depth=2, src=citation]
+  - (Linial & Peled 2016) On the phase transition in random simplicial complexes  [depth=2, src=citation]
+  - (Kahle 2016) Random simplicial complexes  [depth=2, src=citation]
+  - (Bobrowski & Weinberger 2016) On the vanishing of homology in random Čech complexes  [depth=2, src=citation]
+  - (Bachmann & Reitzner 2017) Concentration for Poisson U-statistics: Subgraph counts in random  [depth=2, src=citation]
+  - (Bobrowski et al. 2017) Maximally persistent cycles in random geometric complexes  [depth=2, src=citation]
+  - (Vergne et al. 2018) Building a Coverage Hole-free Communication Tree  [depth=2, src=citation]
+  - (Hiraoka et al. 2018) Limit theorems for persistence diagrams  [depth=2, src=citation]
+  - (Hudson et al. 2018) Mesh Enhanced Persistent Homology  [depth=2, src=citation]
+  - (Lachièze-Rey et al. 2019) Normal approximation for stabilizing functionals  [depth=2, src=citation]
+  - (Bandeira et al. 2019) Computational Hardness of Certifying Bounds on Constrained PCA Pr  [depth=2, src=citation]
+  - (Eldan & Mikulincer 2020) Information and Dimensionality of Anisotropic Random Geometric Gr  [depth=2, src=citation]
+  - (Biermé & Desolneux 2020) Mean geometry for 2D random fields: Level perimeter and level tot  [depth=2, src=citation]
+  - (Thomas & Owada 2021) Functional limit theorems for the euler characteristic process in  [depth=2, src=citation]
+  - (Krebs et al. 2021) On approximation theorems for the Euler characteristic with appli  [depth=2, src=citation]
+  - (Dowling & Lundberg 2021) Homotopy types of random cubical complexes  [depth=2, src=citation]
+  - (Krebs 2021) On the law of the iterated logarithm and strong invariance princi  [depth=2, src=citation]
+  - (Schramm & Wein 2022) Computational barriers to estimation from low-degree polynomials  [depth=2, src=citation]
+  - (Liu et al. 2023) Local and Global Expansion in Random Geometric Graphs  [depth=2, src=citation]
+  - (Liu & Rácz 2023) Phase transition in noisy high-dimensional random geometric graph  [depth=2, src=citation]
+  - (Willhalm 2024) Limit theory for spatial random networks  [depth=2, src=citation]
+
+======================================================================
+  CHAT-ONLY — missed by pipeline (11)
+======================================================================
+  - Phase transitions for detecting latent geometry in random graphs
+    query: 1910.14167
+    s2_id: 12b3630e529ac89a48a94a194f53f48948a97bd4
+  - Threshold for detecting high dimensional geometry in anisotropic random geo
+    query: Closing the anisotropic gap in random geometric graphs
+    s2_id: 4781fd614a38bd4b885650a52e3feddd50558f08
+  - A Smooth Transition from Wishart to GOE
+    query: A smooth transition from Wishart to GOE
+    s2_id: d35c61d2304eb76232cd7e37b2d9e9470c920ee2
+  - Entropic CLT and phase transition in high-dimensional Wishart matrices
+    query: Entropic CLT and phase transition in high-dimensional Wishart matrices
+    s2_id: cba23e191d972608c46382e7f9aecb374190bd9e
+  - Non-Gaussian Component Analysis via Lattice Basis Reduction
+    query: Non-Gaussian component analysis via lattice basis reduction
+    s2_id: 6ae3a43978db60564b970349fa70574a0416de08
+  - [LOW CONF] [LOW CONF 53.43511450381679%] Efficient Rare-Event Simulation for Random Ge
+    query: Sandwiching random geometric graphs and networks
+    s2_id: 076d4acb2af653bcc2b8116b4871485bee68cfea
+  - Detection of Dense Subhypergraphs by Low‐Degree Polynomials
+    query: 2304.08135
+    s2_id: e76334387ddccd3464f6c6dca5cf2a78eb51f9a4
+  - Modeling Network Populations via Graph Distances
+    query: Modeling network populations via graph distances
+    s2_id: 583801b198a676bf3f42d7ef998382825d65ef5c
+  - Forman-Ricci Curvature for Hypergraphs
+    query: Forman-Ricci curvature for hypergraphs
+    s2_id: 45fd1943c74ef395cfa3f55cdeb5a1802712b639
+  - Detection-Recovery and Detection-Refutation Gaps via Reductions from Plante
+    query: Detection-recovery and detection-refutation gaps via reductions from p
+    s2_id: 22c6d84c22e34c520f6f731cfcd0df5da75babd8
+  - Geometric Model Selection for Latent Space Network Models: Hypothesis Testi
+    query: 2510.06136
+    s2_id: 4e26f78eaefd7475ebe7594c1b8e3a9426c8f90a

@@ -1,0 +1,54 @@
+# Papers from Claude.ai chat literature review
+# "Testing for Geometry in Random Graphs — State of the Art"
+
+arxiv:1411.5713
+arxiv:1910.14167
+arxiv:2111.11316
+
+# Eldan & Mikulincer (2020) - Anisotropic RGG
+Detection of a latent geometry in random geometric graphs
+
+# Brennan, Bresler & Huang (2024) - Closing the Anisotropic Gap
+Closing the anisotropic gap in random geometric graphs
+
+# Rácz & Richey (2019) - Wishart-GOE Transitions
+A smooth transition from Wishart to GOE
+
+# Bubeck & Ganguly (2018) - Entropic CLT for Wishart
+Entropic CLT and phase transition in high-dimensional Wishart matrices
+
+# Liu & Rácz (2021/2023) - Noisy Geometry
+A probabilistic view of latent space graphs and phase transitions
+
+# Bangachev & Bresler (2023) - Random Algebraic Graphs
+Random algebraic graphs and their convergence to Erdős-Rényi
+
+# Bangachev & Bresler (STOC 2024) - Fourier Coefficients
+Non-Gaussian component analysis via lattice basis reduction
+
+# Bangachev & Bresler (COLT 2024) - L-infinity geometry
+Beyond the signed triangle statistic: geometry detection via 4-cycles
+
+# Bangachev & Bresler (STOC 2025) - Sandwiching
+Sandwiching random geometric graphs and networks
+
+# Bobrowski & Kahle (2018) - Random geometric complexes survey
+Topology of random geometric complexes: a survey
+
+# Dhawan, Mao & Wein (2023) - Detection in random hypergraphs
+arxiv:2304.08135
+
+# Lunagómez et al. - Latent space models for hypergraphs
+Modeling network populations via graph distances
+
+# Leal, Eidi & Jost (2020) - Forman-Ricci curvature on hypergraphs
+Forman-Ricci curvature for hypergraphs
+
+# Michielan, Stegehuis & Walter - scale-free geometric random graphs
+Detecting geometry in sparse random graphs using the Wasserstein distance
+
+# Mao, Wein & Zhang (2023) - Planted dense cycles
+Detection-recovery and detection-refutation gaps via reductions from planted clique
+
+# Papamichalis, Wilkins-Reeves et al. (2025)
+arxiv:2510.06136
