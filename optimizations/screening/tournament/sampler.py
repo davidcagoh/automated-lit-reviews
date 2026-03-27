@@ -117,6 +117,11 @@ def main() -> None:
     parser.add_argument("--seed",         type=int, default=42)
     parser.add_argument("--dry-run", action="store_true",
                         help="Print stats only, don't write output file")
+    parser.add_argument("--as-ground-truth", action="store_true",
+                        help="Write {title: decision} directly as ground_truth.json "
+                             "using DB decisions, skipping the in-chat labeling step. "
+                             "The candidate_test_set.json (with abstracts) is still "
+                             "written alongside so the runner has abstracts for LLM calls.")
     args = parser.parse_args()
 
     import tomllib
@@ -158,10 +163,21 @@ def main() -> None:
     with open(out_path, "w") as f:
         json.dump(papers, f, indent=2)
     print(f"\nWritten to: {out_path}")
-    print("\nNext step: share this file with Claude in chat to generate ground_truth.json.")
-    print('  Ask Claude to read the file and screen each paper against the current criteria,')
-    print('  then write decisions to optimizations/screening/tournament/ground_truth.json')
-    print('  as {"title": "include"|"exclude", ...}')
+
+    if args.as_ground_truth:
+        # Write ground_truth.json directly from DB decisions alongside the candidate set
+        gt = {p["title"]: p["gt_decision"] for p in papers if p.get("title")}
+        gt_path = Path(args.out).parent / "ground_truth.json"
+        with open(gt_path, "w") as f:
+            json.dump(gt, f, indent=2)
+        print(f"Ground truth written to: {gt_path}  ({len(gt)} entries, using DB decisions)")
+        print("\nNext: python run_tournament.py --round 1 --config rounds/round_1.toml")
+    else:
+        print("\nNext step: share this file with Claude in chat to generate ground_truth.json.")
+        print('  Ask Claude to screen each paper against the current criteria and write')
+        print('  decisions to optimizations/screening/tournament/ground_truth.json')
+        print('  as {"title": "include"|"exclude", ...}')
+        print("  (Or re-run with --as-ground-truth to use DB decisions directly.)")
 
 
 if __name__ == "__main__":
