@@ -234,7 +234,7 @@ def _fetch_s2_references(s2_id: str) -> list[dict]:
         except Exception as e:
             logger.warning("S2 references fallback failed: %s", e)
             break
-        items = data.get("data", [])
+        items = data.get("data") or []
         for item in items:
             cp = item.get("citedPaper") or {}
             ext = cp.get("externalIds") or {}

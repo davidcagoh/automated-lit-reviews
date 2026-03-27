@@ -182,16 +182,23 @@ def screen(
     config: Optional[Path] = typer.Option(None, "--config", "-c", help="Path to project TOML."),
     project_name: Optional[str] = typer.Argument(None, help="Project name."),
     model: Optional[str] = typer.Option(None, "--model", "-m", help="Model ID (defaults per backend)."),
-    backend: str = typer.Option("groq", "--backend", "-b", help="LLM backend: groq, gemini, openrouter, or anthropic."),
+    backend: str = typer.Option("gemini", "--backend", "-b", help="LLM backend: groq, gemini, openrouter, anthropic, or comma-separated list for failover."),
     dry_run: bool = typer.Option(False, "--dry-run", help="Print decisions without writing to DB."),
+    limit: Optional[int] = typer.Option(None, "--limit", "-n", help="Stop after screening this many papers."),
+    rate_sleep: Optional[float] = typer.Option(None, "--rate-sleep", help="Override per-backend rate sleep (seconds). Useful on paid tiers with higher RPM limits."),
+    include_uncertain: bool = typer.Option(False, "--include-uncertain", help="Clear UNCERTAIN prefix from pending papers so they get a clean re-screen."),
+    non_interactive: bool = typer.Option(False, "--non-interactive", help="Never prompt on backend failure — auto-switch or raise immediately."),
+    yes: bool = typer.Option(False, "--yes", "-y", help="Skip large-batch confirmation prompt (>200 papers)."),
 ) -> None:
     """Screen pending papers against inclusion criteria using an LLM backend."""
+    import sys as _sys
     import tomllib
     from litreview.db import get_client, get_or_create_project, next_round_number
     from litreview.screen import screen_project
 
-    if backend not in ("groq", "gemini", "openrouter", "anthropic"):
-        console.print("[red]--backend must be one of: groq, gemini, openrouter, anthropic.[/red]")
+    _valid_backends = {"groq", "gemini", "openrouter", "anthropic"}
+    if not all(b.strip() in _valid_backends for b in backend.split(",")):
+        console.print("[red]--backend must be one of: groq, gemini, openrouter, anthropic (or comma-separated).[/red]")
         raise typer.Exit(1)
 
     if config:
@@ -209,9 +216,21 @@ def screen(
     round_number = next_round_number(client, project_id)
 
     console.print(f"[bold]Project:[/bold] {name}  ({project_id})")
-    console.print(f"Screening round {round_number} | backend={backend}" + (f" model={model}" if model else "") + (" [DRY RUN]" if dry_run else "") + "\n")
+    console.print(f"Screening round {round_number} | backend={backend}" + (f" model={model}" if model else "") + (f" rate-sleep={rate_sleep}s" if rate_sleep is not None else "") + (" [DRY RUN]" if dry_run else "") + "\n")
 
-    counts = screen_project(client, project_id, round_number, model=model, dry_run=dry_run, backend=backend)
+    is_interactive = not non_interactive and _sys.stdin.isatty()
+    try:
+        counts = screen_project(
+            client, project_id, round_number,
+            model=model, dry_run=dry_run, backend=backend, limit=limit,
+            rate_sleep_override=rate_sleep,
+            include_uncertain=include_uncertain,
+            interactive=is_interactive,
+            skip_confirmation=yes or not is_interactive,
+        )
+    except RuntimeError as e:
+        console.print(f"\n[bold red]Screening stopped:[/bold red] {e}")
+        raise typer.Exit(1)
 
     table = Table("Metric", "Count")
     table.add_row("Total pending",  str(counts["total"]))
@@ -354,7 +373,7 @@ def iterate(
     project_name: Optional[str] = typer.Argument(None, help="Project name."),
     direction: str = typer.Option("both", "--direction", "-d"),
     model: Optional[str] = typer.Option(None, "--model", "-m", help="Model ID (defaults per backend)."),
-    backend: str = typer.Option("groq", "--backend", "-b", help="LLM backend: groq, gemini, openrouter, or anthropic."),
+    backend: str = typer.Option("gemini", "--backend", "-b", help="LLM backend: groq, gemini, openrouter, or anthropic."),
     dry_run: bool = typer.Option(False, "--dry-run"),
     loop: bool = typer.Option(False, "--loop", help="Keep iterating until stable."),
     max_rounds: int = typer.Option(10, "--max-rounds", help="Maximum rounds when --loop is set."),
@@ -846,7 +865,7 @@ v1 = \"\"\"
 @app.command()
 def run(
     config: Path = typer.Argument(..., help="Path to project TOML."),
-    backend: str = typer.Option("groq", "--backend", "-b", help="LLM backend: groq, gemini, openrouter, or anthropic."),
+    backend: str = typer.Option("gemini", "--backend", "-b", help="LLM backend: groq, gemini, openrouter, or anthropic."),
     model: Optional[str] = typer.Option(None, "--model", "-m"),
     direction: str = typer.Option("both", "--direction", "-d"),
     max_rounds: int = typer.Option(10, "--max-rounds", help="Safety cap on iterations."),

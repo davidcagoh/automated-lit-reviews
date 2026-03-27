@@ -47,11 +47,16 @@ class Paper(BaseModel):
     source: str = "seed"   # 'seed' | 'citation' | 'search'
     depth: int = 0
 
+    # Fields managed exclusively by the screener — never overwrite via ingest/traverse upsert
+    _SCREENER_FIELDS = {"inclusion_status", "rejection_reason", "screening_round", "criteria_version"}
+
     def db_dict(self) -> dict[str, Any]:
-        """Return a dict suitable for Supabase upsert (no None paper_id)."""
-        d = self.model_dump(exclude={"paper_id"})
+        """Return a dict suitable for Supabase upsert (no None paper_id).
+
+        Screening fields are excluded so that traversal/ingest upserts never
+        overwrite decisions made by the screener.  New rows get the DB-level
+        default (inclusion_status = 'pending'); existing rows keep their state.
+        """
+        d = self.model_dump(exclude={"paper_id"} | self._SCREENER_FIELDS)
         d["authors"] = [a.model_dump() for a in self.authors]
-        if d["embedding"] is not None:
-            # Supabase expects a list; pgvector handles conversion
-            pass
         return {k: v for k, v in d.items() if v is not None}
