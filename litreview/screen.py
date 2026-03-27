@@ -139,6 +139,21 @@ Respond with a JSON object with exactly two keys:
 If the abstract is missing, base your decision on the title alone and note this in reasoning.\
 """
 
+_BATCH_SYSTEM_PROMPT = """\
+You are a systematic literature review screener. Below are {n} papers (title and abstract). \
+Decide whether each meets the inclusion criteria.
+
+INCLUSION CRITERIA:
+{criteria}
+
+Respond with a JSON object with a single key "decisions", whose value is an array of exactly \
+{n} objects (one per paper, in the same order):
+  {{"decisions": [{{"paper_index": 0, "decision": "include|exclude|uncertain", \
+"reasoning": "1-3 sentences"}}, ...]}}
+
+If a paper's abstract is missing, base your decision on the title alone and note this in reasoning.\
+"""
+
 
 # ── OpenAI-compatible API call (Groq, Gemini, OpenRouter) ─────────────────────
 
@@ -176,7 +191,7 @@ def _call_openai_compat(messages: list[dict], model: str, api_key: str, url: str
     wait=wait_exponential(min=5, max=60),
     retry=retry_if_exception(_is_retryable),
 )
-def _call_anthropic(system: str, user: str, model: str, api_key: str) -> str:
+def _call_anthropic(system: str, user: str, model: str, api_key: str, max_tokens: int = 256) -> str:
     resp = httpx.post(
         "https://api.anthropic.com/v1/messages",
         headers={
@@ -186,12 +201,12 @@ def _call_anthropic(system: str, user: str, model: str, api_key: str) -> str:
         },
         json={
             "model": model,
-            "max_tokens": 256,
+            "max_tokens": max_tokens,
             "system": system,
             "messages": [{"role": "user", "content": user}],
             "temperature": 0.1,
         },
-        timeout=30,
+        timeout=60,
     )
     resp.raise_for_status()
     return resp.json()["content"][0]["text"]
@@ -299,6 +314,92 @@ def screen_paper(
         return {"decision": "uncertain", "reasoning": f"Parse error: {raw[:200]}"}
 
 
+def screen_papers_batch(
+    papers: list[dict],
+    criteria: str,
+    backend: str = "groq",
+    model: str | None = None,
+    api_key: str | None = None,
+) -> list[dict[str, str]]:
+    """
+    Screen a batch of papers in a single LLM call.
+
+    Returns a list of {"decision": ..., "reasoning": ...} dicts aligned to the input order.
+    Falls back to individual screen_paper() calls if the batch response cannot be parsed
+    (e.g. model returns malformed JSON or wrong number of decisions).
+
+    Each paper dict must have "title"; "abstract" is optional.
+    """
+    n = len(papers)
+    system = _BATCH_SYSTEM_PROMPT.format(n=n, criteria=criteria)
+
+    lines = []
+    for idx, p in enumerate(papers):
+        abstract = p.get("abstract") or "(not available)"
+        lines.append(f"Paper {idx}:\nTitle: {p['title']}\nAbstract: {abstract}")
+    user_msg = "\n\n".join(lines)
+
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": user_msg},
+    ]
+
+    if backend == "anthropic":
+        resolved_api_key = api_key or settings.anthropic_api_key
+        if not resolved_api_key:
+            raise RuntimeError("ANTHROPIC_API_KEY not set")
+        resolved_model = model or _DEFAULT_ANTHROPIC_MODEL
+        raw = _call_anthropic(system, user_msg, resolved_model, resolved_api_key, max_tokens=n * 200)
+    elif backend == "gemini":
+        resolved_api_key = api_key or settings.gemini_api_key
+        if not resolved_api_key:
+            raise RuntimeError("GEMINI_API_KEY not set")
+        resolved_model = model or _DEFAULT_GEMINI_MODEL
+        raw = _call_openai_compat(messages, resolved_model, resolved_api_key, _GEMINI_URL)
+    elif backend == "openrouter":
+        resolved_api_key = api_key or settings.openrouter_api_key
+        if not resolved_api_key:
+            raise RuntimeError("OPENROUTER_API_KEY not set")
+        resolved_model = model or _DEFAULT_OPENROUTER_MODEL
+        raw = _call_openai_compat(messages, resolved_model, resolved_api_key, _OPENROUTER_URL)
+    else:  # groq
+        resolved_api_key = api_key or settings.groq_api_key
+        if not resolved_api_key:
+            raise RuntimeError("GROQ_API_KEY not set")
+        resolved_model = model or _DEFAULT_GROQ_MODEL
+        raw = _call_openai_compat(messages, resolved_model, resolved_api_key, _GROQ_URL)
+
+    try:
+        parsed = json.loads(raw)
+        decisions_raw = parsed.get("decisions")
+        if not isinstance(decisions_raw, list):
+            raise ValueError(f"'decisions' is not a list: {type(decisions_raw)}")
+        if len(decisions_raw) != n:
+            raise ValueError(f"Expected {n} decisions, got {len(decisions_raw)}")
+
+        results: list[dict[str, str] | None] = [None] * n
+        for item in decisions_raw:
+            idx = item.get("paper_index")
+            if not isinstance(idx, int) or idx < 0 or idx >= n:
+                raise ValueError(f"Invalid paper_index: {idx!r}")
+            decision = item.get("decision")
+            if decision not in ("include", "exclude", "uncertain"):
+                raise ValueError(f"Unexpected decision: {decision!r}")
+            results[idx] = {"decision": decision, "reasoning": item.get("reasoning", "")}
+
+        if any(r is None for r in results):
+            raise ValueError("Some paper indices missing from batch response")
+
+        return results  # type: ignore[return-value]
+
+    except (json.JSONDecodeError, ValueError, KeyError) as e:
+        logger.warning("Batch parse failed (%s) — falling back to individual screening for %d papers", e, n)
+        return [
+            screen_paper(p["title"], p.get("abstract"), criteria, model=model, backend=backend, api_key=api_key)
+            for p in papers
+        ]
+
+
 # ── Project-level screening ───────────────────────────────────────────────────
 
 def screen_project(
@@ -313,6 +414,7 @@ def screen_project(
     include_uncertain: bool = False,
     interactive: bool = True,
     skip_confirmation: bool = False,
+    batch_size: int = 1,
 ) -> dict[str, int]:
     """
     Screen all 'pending' papers for *project_id* using the latest criteria.
@@ -399,15 +501,17 @@ def screen_project(
     }
     effective_model = model or _defaults.get(active_backend, _DEFAULT_GROQ_MODEL)
 
-    # Upfront time estimate
+    # Upfront time estimate (batch mode amortises rate sleep over batch_size papers)
+    _batch = max(1, batch_size)
     sleep_s_est = _get_sleep(active_backend, rate_sleep_override)
-    est_per_paper = sleep_s_est + _EST_LATENCY.get(active_backend, 1.0)
+    est_per_paper = (sleep_s_est + _EST_LATENCY.get(active_backend, 1.0)) / _batch
     est_total_min = (len(pending) * est_per_paper) / 60
     console.print(
         f"Screening round {screening_round} | "
         f"backend={active_backend} | "
         f"{len(pending)} pending | "
-        f"~{est_per_paper:.1f}s/paper | "
+        + (f"batch={_batch} | " if _batch > 1 else "")
+        + f"~{est_per_paper:.1f}s/paper | "
         f"ETA ~{est_total_min:.0f} min"
     )
 
@@ -430,10 +534,8 @@ def screen_project(
     chunk_start_time = time.monotonic()
     chunk_start_i = 0
 
-    for i, paper in enumerate(pending):
-        title = paper["title"]
-        abstract = paper.get("abstract")
-
+    i = 0
+    while i < len(pending):
         # Chunk progress summary
         if i > 0 and i % _CHUNK_SIZE == 0:
             elapsed = time.monotonic() - chunk_start_time
@@ -441,7 +543,6 @@ def screen_project(
             rate = elapsed / chunk_papers if chunk_papers else 0
             remaining = len(pending) - i
             eta_min = (remaining * rate) / 60
-            done_so_far = counts["include"] + counts["exclude"] + counts["uncertain"]
             console.print(
                 f"[bold cyan][Progress {i}/{len(pending)}][/bold cyan] "
                 f"{counts['include']} incl  {counts['exclude']} excl  "
@@ -451,15 +552,25 @@ def screen_project(
             chunk_start_time = time.monotonic()
             chunk_start_i = i
 
+        chunk = pending[i : i + _batch]
+
         try:
-            result = screen_paper(
-                title, abstract, criteria_content,
-                model=effective_model, backend=active_backend,
-            )
+            if _batch == 1:
+                paper = chunk[0]
+                results = [screen_paper(
+                    paper["title"], paper.get("abstract"), criteria_content,
+                    model=effective_model, backend=active_backend,
+                )]
+            else:
+                results = screen_papers_batch(
+                    chunk, criteria_content,
+                    model=effective_model, backend=active_backend,
+                )
             consecutive_errors = 0
         except Exception as e:
-            logger.error("[%d/%d] SKIP '%s': %s", i + 1, len(pending), title[:55], e)
-            counts["skipped"] += 1
+            for paper in chunk:
+                logger.error("[%d/%d] SKIP '%s': %s", i + 1, len(pending), paper["title"][:55], e)
+            counts["skipped"] += len(chunk)
             consecutive_errors += 1
 
             # Prompt or rotate after too many consecutive errors
@@ -471,7 +582,6 @@ def screen_project(
                 if interactive and sys.stdin.isatty():
                     action = _prompt_backend_action(active_backend, next_backend_name, console)
                 else:
-                    # Non-interactive: auto-switch if possible, otherwise hard-stop
                     action = "switch" if has_next else "quit"
 
                 if action == "retry":
@@ -483,7 +593,6 @@ def screen_project(
                     active_backend = backend_list[active_backend_idx]
                     effective_model = model or _defaults.get(active_backend, _DEFAULT_GROQ_MODEL)
                     consecutive_errors = 0
-                    # Sleep with new backend's rate before the first call to it
                     switch_sleep = _get_sleep(active_backend, rate_sleep_override)
                     if switch_sleep:
                         time.sleep(switch_sleep)
@@ -497,36 +606,41 @@ def screen_project(
                         f"{_CONSECUTIVE_ERROR_LIMIT} times with no fallback. "
                         f"Check quota at {_BILLING_URLS.get(active_backend, 'your provider')}."
                     )
+
+            i += len(chunk)
             continue
 
-        decision = result["decision"]
-        reasoning = result["reasoning"]
-        counts[decision] += 1
+        for paper, result in zip(chunk, results):
+            decision = result["decision"]
+            reasoning = result["reasoning"]
+            counts[decision] += 1
 
-        if decision == "include":
-            db_status = "included"
-            db_reason = None
-        elif decision == "exclude":
-            db_status = "excluded"
-            db_reason = reasoning
-        else:  # uncertain
-            db_status = "pending"
-            db_reason = f"UNCERTAIN: {reasoning}"
+            if decision == "include":
+                db_status = "included"
+                db_reason = None
+            elif decision == "exclude":
+                db_status = "excluded"
+                db_reason = reasoning
+            else:  # uncertain
+                db_status = "pending"
+                db_reason = f"UNCERTAIN: {reasoning}"
 
-        logger.info(
-            "[%d/%d] %-8s '%s'",
-            i + 1, len(pending), decision.upper(), title[:55],
-        )
-
-        if not dry_run:
-            update_paper_screening(
-                client,
-                paper_id=paper["paper_id"],
-                status=db_status,
-                rejection_reason=db_reason,
-                screening_round=screening_round,
-                criteria_version=criteria_version,
+            logger.info(
+                "[%d/%d] %-8s '%s'",
+                i + 1, len(pending), decision.upper(), paper["title"][:55],
             )
+
+            if not dry_run:
+                update_paper_screening(
+                    client,
+                    paper_id=paper["paper_id"],
+                    status=db_status,
+                    rejection_reason=db_reason,
+                    screening_round=screening_round,
+                    criteria_version=criteria_version,
+                )
+
+        i += len(chunk)
 
         sleep_s = _get_sleep(active_backend, rate_sleep_override)
         if sleep_s:
