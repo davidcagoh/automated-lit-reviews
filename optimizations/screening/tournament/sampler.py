@@ -58,12 +58,30 @@ def sample_test_set(
     for Claude's in-chat review, not as final ground truth.
     """
     rng = random.Random(seed)
-    papers = get_papers(client, project_id)
-    # Exclude seeds from the test set — we want screened candidates only
-    non_seed = [p for p in papers if p.get("source") != "seed"]
-
-    included   = [p for p in non_seed if p.get("inclusion_status") == "included"]
-    excluded   = [p for p in non_seed if p.get("inclusion_status") == "excluded"]
+    # Query included and excluded separately to avoid the 1000-row Supabase default
+    # cap (projects with thousands of pending papers would otherwise drown out screened ones)
+    included_raw = (
+        client.table("papers")
+        .select("paper_id,title,abstract,source,inclusion_status,rejection_reason")
+        .eq("project_id", project_id)
+        .eq("inclusion_status", "included")
+        .neq("source", "seed")
+        .limit(5000)
+        .execute()
+        .data or []
+    )
+    excluded_raw = (
+        client.table("papers")
+        .select("paper_id,title,abstract,source,inclusion_status,rejection_reason")
+        .eq("project_id", project_id)
+        .eq("inclusion_status", "excluded")
+        .neq("source", "seed")
+        .limit(5000)
+        .execute()
+        .data or []
+    )
+    included = included_raw
+    excluded = excluded_raw
     borderline = [p for p in excluded if _is_borderline(p)]
     regular_excluded = [p for p in excluded if not _is_borderline(p)]
 

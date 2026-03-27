@@ -1,0 +1,843 @@
+[
+  {
+    "paper_id": "b73a26b0-90f5-4808-a2cb-d7f15751ed6f",
+    "title": "Language-Driven Representation Learning for Robotics",
+    "abstract": "Recent work in visual representation learning for robotics demonstrates the viability of learning from large video datasets of humans performing everyday tasks.Leveraging methods such as masked autoencoding and contrastive learning, these representations exhibit strong transfer to policy learning for visuomotor control.But, robot learning encompasses a diverse set of problems beyond control including grasp affordance prediction, language-conditioned imitation learning, and intent scoring for human-robot collaboration, amongst others.First, we demonstrate that existing representations yield inconsistent results across these tasks: masked autoencoding approaches pick up on low-level spatial features at the cost of high-level semantics, while contrastive learning approaches capture the opposite.We then introduce Voltron, a framework for language-driven representation learning from videos and associated captions.Voltron trades off language-conditioned visual reconstruction to learn low-level visual patterns, and visually-grounded language generation to encode high-level semantics.We also construct an evaluation suite spanning five distinct robot learning problems -a unified platform for holistically evaluating visual representations for robotics.Through comprehensive, controlled experiments across all five problems, we find that Voltron's language-driven representations outperform the prior state-of-the-art, especially on targeted problems requiring higher-level features. 1",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "1031f635-cdf8-4477-aa30-7005c7218ed0",
+    "title": "Advisable Learning for Self-Driving Vehicles by Internalizing Observation-to-Action Rules",
+    "abstract": "Humans learn to drive through both practice and theory, e.g. by studying the rules, while most self-driving systems are limited to the former. Being able to incorporate human knowledge of typical causal driving behaviour should benefit autonomous systems. We propose a new approach that learns vehicle control with the help of human advice. Specifically, our system learns to summarize its visual observations in natural language, predict an appropriate action response (e.g. \"I see a pedestrian crossing, so I stop\"), and predict the controls, accordingly. Moreover, to enhance interpretability of our system, we introduce a fine-grained attention mechanism which relies on semantic segmentation and object-centric RoI pooling. We show that our approach of training the autonomous system with human advice, grounded in a rich semantic representation, matches or outperforms prior work in terms of control prediction and explanation generation. Our approach also results in more interpretable visual explanations by visualizing object-centric attention maps. Code is available at https://github.com/JinkyuKimUCB/advisable-driving.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "692400d2-ba42-46eb-bd50-778e02743757",
+    "title": "Toward Mobile Robots Reasoning Like Humans",
+    "abstract": "Robots are increasingly becoming key players in human-robot teams. To become effective teammates, robots must possess profound understanding of an environment, be able to reason about the desired commands and goals within a specific context, and be able to communicate with human teammates in a clear and natural way. To address these challenges, we have developed an intelligence architecture that combines cognitive components to carry out high-level cognitive tasks, semantic perception to label regions in the world, and a natural language component to reason about the command and its relationship to the objects in the world. This paper describes recent developments using this architecture on a fielded mobile robot platform operating in unknown urban environments. We report a summary of extensive outdoor experiments; the results suggest that a multidisciplinary approach to robotics has the potential to create competent human-robot teams.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "544a1efc-ba6d-44f5-ad9f-9e8f4579892e",
+    "title": "Natural language and spatial reasoning",
+    "abstract": "Making systems that understand language has long been a dream of artificial intelligence. This thesis develops a model for understanding language about space and movement in realistic situations. The system understands language from two real-world domains: finding video clips that match a spatial language description such as People walking through the kitchen and then going to the dining room and following natural language commands such as Go down the hall towards the fireplace in the living room. Understanding spatial language expressions is a challenging problem because linguistic expressions, themselves complex and ambiguous, must be connected to real-world objects and events. The system bridges the gap between language and the world by modeling the meaning of spatial language expressions hierarchically, first capturing the semantics of spatial prepositions, and then composing these meanings into higher level structures. Corpus-based evaluations of how well the system performs in different, realistic domains show that the system effectively and robustly understands spatial language expressions. (Copies available exclusively from MIT Libraries, Rm. 14-0551, Cambridge, MA 02139-4307. Ph. 617-253-5668; Fax 617-253-1690.)",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "4d5a787b-cde4-41df-bcd2-76c325305d0a",
+    "title": "The influence of social media on the evolution of online expression and language",
+    "abstract": "The rise of social media has significantly influenced online expression and language, shaping communication patterns, linguistic creativity, and cultural exchange. Platforms such as Twitter, Facebook, Instagram, and TikTok have provided users with new modes of expression, fostering the rapid evolution of digital language. This paper explores the ways in which social media has transformed communication, including the creation of internet slang, emojis, memes, and abbreviations that facilitate quick and effective interaction. Additionally, social media has democratized language, allowing marginalized communities to amplify their voices and contribute to linguistic diversity. One of the key impacts of social media is its role in shaping public discourse and informal communication styles. Hashtags, viral trends, and user-generated content have become powerful tools for advocacy, social movements, and online communities. Moreover, the brevity of communication on platforms like Twitter has led to linguistic innovation, including condensed phrases, acronyms, and hybrid languages that merge different linguistic elements. However, the influence of social media on language also raises concerns about misinformation, the erosion of formal writing skills, and the oversimplification of complex ideas. The shift toward visual communication, including GIFs, stickers, and emojis, has transformed traditional textual interaction, making digital conversations more dynamic and expressive. This study highlights the dual impact of social media\u2014both as a driver of linguistic evolution and as a potential challenge to traditional language norms. Understanding these changes is essential for linguists, educators, and digital communication experts as they navigate the evolving landscape of online expression.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "fef1d7ef-3735-417e-9857-836abb252680",
+    "title": "LANA: A Language-Capable Navigator for Instruction Following and Generation",
+    "abstract": "Recently, visual-language navigation (VLN) - entailing robot agents to follow navigation instructions - has shown great advance. However, existing literature put most emphasis on interpreting instructions into actions, only delivering \u201cdumb\u201d wayfinding agents. In this article, we devise LANA, a language-capable navigation agent which is able to not only execute human-written navigation commands, but also provide route descriptions to humans. This is achieved by simultaneously learning instruction following and generation with only one single model. More specifically, two encoders, respectively for route and language encoding, are built and shared by two decoders, respectively for action prediction and instruction generation, so as to exploit cross-task knowledge and capture task-specific characteristics. Throughout pretraining and fine-tuning, both instruction following and generation are set as optimization objectives. We empirically verify that, compared with recent advanced task-specific solutions, LANA attains better performances on both instruction following and route description, with nearly half complexity. In addition, endowed with language generation capability, Lanacan explain to human its behaviours and assist human's wayfinding. This work is expected to foster future efforts towards building more trustworthy and socially-intelligent navigation robots.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "e18525c2-33c6-466b-9b03-862e88a636e1",
+    "title": "Human\u2013Agent Teaming for Multirobot Control: A Review of Human Factors Issues",
+    "abstract": "The human factors literature on intelligent systems was reviewed in relation to the following: efficient human supervision of multiple robots, appropriate human trust in the automated systems, maintenance of human operator's situation awareness, individual differences in human-agent (H-A) interaction, and retention of human decision authority. A number of approaches-from flexible automation to autonomous agents-were reviewed, and their advantages and disadvantages were discussed. In addition, two key human performance issues (trust and situation awareness) related to H-A teaming for multirobot control and some promising user interface design solutions to address these issues were discussed. Some major individual differences factors (operator spatial ability, attentional control ability, and gaming experience) were identified that may impact H-A teaming in the context of robotics control.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "ebfe8249-6228-4d47-953a-445fd19a59b3",
+    "title": "Environment-Driven Lexicon Induction for High-Level Instructions",
+    "abstract": "Dipendra Kumar Misra, Kejia Tao, Percy Liang, Ashutosh Saxena. Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 1: Long Papers). 2015.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "e90a2e7f-4883-4bbc-af1a-2b5db964ee6b",
+    "title": "LiDAR-guided Geometric Pretraining for Vision-Centric 3D Object Detection",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "83131832-f5fc-48e4-841b-6719e1514f27",
+    "title": "NDH-Full: Learning and Evaluating Navigational Agents on Full-Length Dialogue",
+    "abstract": "Communication between human and mobile agents is getting increasingly important as such agents are widely deployed in our daily lives. Vision-and-Dialogue Navigation is one of the tasks that evaluate the agent's ability to interact with humans for assistance and navigate based on natural language responses. In this paper, we explore the Navigation from Dialogue History (NDH) task, which is based on the Cooperative Vision-and-Dialogue Navigation (CVDN) dataset, and present a stateof-the-art model which is built upon Vision-Language transformers. However, despite achieving competitive performance, we find that the agent in the NDH task is not evaluated appropriately by the primary metric -Goal Progress. By analyzing the performance mismatch between Goal Progress and other metrics (e.g., normalized Dynamic Time Warping) from our state-of-the-art model, we show that NDH's sub-path based task setup (i.e., navigating partial trajectory based on its correspondent subset of the full dialogue) does not provide the agent with enough supervision signal towards the goal region. Therefore, we propose a new task setup called NDH-FULL which takes the full dialogue and the whole navigation path as one instance. We present a strong baseline model and show initial results on this new task. We further describe several approaches that we try, in order to improve the model performance (based on curriculum learning, pre-training, and data-augmentation), suggesting potential useful training methods on this new NDH-FULL task. 1",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "7407b8f4-5423-4a04-b778-f2eb589a9ebd",
+    "title": "Learning Dependency-Based Compositional Semantics",
+    "abstract": "Suppose we want to build a system that answers a natural language question by representing its semantics as a logical forxm and computing the answer given a structured database of facts. The core part of such a system is the semantic parser that maps questions to logical forms. Semantic parsers are typically trained from examples of questions annotated with their target logical forms, but this type of annotation is expensive. Our goal is to instead learn a semantic parser from question\u2013answer pairs, where the logical form is modeled as a latent variable. We develop a new semantic formalism, dependency-based compositional semantics (DCS) and define a log-linear distribution over DCS logical forms. The model parameters are estimated using a simple procedure that alternates between beam search and numerical optimization. On two standard semantic parsing benchmarks, we show that our system obtains comparable accuracies to even state-of-the-art systems that do require annotated logical forms.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "426328c5-bc3d-4876-826d-4754984d0f94",
+    "title": "Human\u2013Robot Interaction",
+    "abstract": "HRI is now applied in almost all robot tasks, including manufacturing, space, aviation, undersea, surgery, rehabilitation, agriculture, education, package fetch and delivery, policing, and military operations.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "4fa1f816-a852-46c7-869c-b4b34529f0d9",
+    "title": "Mapping Instructions and Visual Observations to Actions with Reinforcement Learning",
+    "abstract": "We propose to directly map raw visual observations and text input to actions for instruction execution. While existing approaches assume access to structured environment representations or use a pipeline of separately trained models, we learn a single model to jointly reason about linguistic and visual input. We use reinforcement learning in a contextual bandit setting to train a neural network agent. To guide the agent's exploration, we use reward shaping with different forms of supervision. Our approach does not require intermediate representations, planning procedures, or training different models. We evaluate in a simulated environment, and show significant improvements over supervised learning and common reinforcement learning variants.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "b909ade2-1ad1-471f-a632-ef6cd88014b2",
+    "title": "Core Challenges in Embodied Vision-Language Planning",
+    "abstract": "Recent advances in the areas of multimodal machine learning and artificial intelligence (AI) have led to the development of challenging tasks at the intersection of Computer Vision, Natural Language Processing, and Embodied AI. Whereas many approaches and previous survey pursuits have characterised one or two of these dimensions, there has not been a holistic analysis at the center of all three. Moreover, even when combinations of these topics are considered, more focus is placed on describing, e.g., current architectural methods, as opposed to also illustrating high-level challenges and opportunities for the field. In this survey paper, we discuss Embodied Vision-Language Planning (EVLP) tasks, a family of prominent embodied navigation and manipulation problems that jointly use computer vision and natural language. We propose a taxonomy to unify these tasks and provide an in-depth analysis and comparison of the new and current algorithmic approaches, metrics, simulated environments, as well as the datasets used for EVLP tasks. Finally, we present the core challenges that we believe new EVLP works should seek to address, and we advocate for task construction that enables model generalizability and furthers real-world deployment.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "882201bc-6d04-4506-afa8-6905a6a4f199",
+    "title": "Visual Language Maps for Robot Navigation",
+    "abstract": "Grounding language to the visual observations of a navigating agent can be performed using off-the-shelf visual-language models pretrained on Internet-scale data (e.g., image captions). While this is useful for matching images to natural language descriptions of object goals, it remains disjoint from the process of mapping the environment, so that it lacks the spatial precision of classic geometric maps. To address this problem, we propose VLMaps, a spatial map representation that directly fuses pretrained visual-language features with a 3D reconstruction of the physical world. VLMaps can be autonomously built from video feed on robots using standard exploration approaches and enables natural language indexing of the map without additional labeled data. Specifically, when combined with large language models (LLMs), VLMaps can be used to (i) translate natural language commands into a sequence of open-vocabulary navigation goals (which, beyond prior work, can be spatial by construction, e.g., \u201cin between the sofa and the TV\u201d or \u201cthree meters to the right of the chair\u201d) directly localized in the map, and (ii) can be shared among multiple robots with different embodiments to generate new obstacle maps on-the-fly (by using a list of obstacle categories). Extensive experiments carried out in simulated and real-world environments show that VLMaps enable navigation according to more complex language instructions than existing methods. Videos are available at https://vlmaps.github.io.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "b573d494-9f0f-4a46-895f-dc3fdb554354",
+    "title": "Exploring the Potential of a Spoken Dialog System-Delivered Paired Discussion Task for Assessing Interactional Competence",
+    "abstract": "While several studies support the appropriateness of tasks delivered through Spoken Dialog Systems (SDSs) for L2 oral communication assessment, few studies have explored the construct of interactional competence (IC) as measured by such tasks. This study aims to address this gap in the literature by investigating the use of IC features by high- and low-ability test-takers in performance on an SDS-delivered paired discussion task, along with the perceived appropriateness of the SDS as a conversation partner. Data collected from 30 test-takers and three trained raters included test-taker task responses, task scores, and semi-structured interviews. The analysis of the task responses for IC features based on a coding scheme adapted from Galaczi (2014) showed that the majority of the features included in the construct definition in the study were consistently observable in the task responses, and the use of observed features generally varied with score levels as expected. The qualitative analysis of the interviews revealed that test-takers generally perceived the system as an appropriate partner for oral communication assessment, although they noted several technical limitations that could affect their task performance. This study helps us better understand the construct of IC underlying SDS-delivered tasks and offers implications for designing and validating these tasks.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "e05cb74c-e211-4a8a-93ea-2a6160f28b84",
+    "title": "Deep Learning Architecture to Assist With Steering a Powered Wheelchair",
+    "abstract": "This paper describes a novel Deep Learning architecture to assist with steering a powered wheelchair. A rule-based approach is utilized to train and test a Long Short Term Memory (LSTM) Neural Network. It is the first time a LSTM has been used for steering a powered wheelchair. A disabled driver uses a joystick to provide desired speed and direction, and the Neural Network provides a safe direction for the wheelchair. Results from the Neural Network are mixed with desired speed and direction to avoid obstacles. Inputs originate from a joystick and from three ultrasonic transducers attached to the chair. The resultant course is a blend of desired directions and directions that steer the chair to avoid collision. A rule-based approach is used to create a training and test set for the Neural Network system and applies deep learning to predict a safe route for a wheelchair. The user can over-ride the new system if necessary.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "db81992a-7456-46f9-92d1-53fc65e321e0",
+    "title": "Linking People in Videos with \u201cTheir\u201d Names Using Coreference Resolution",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "f857cb5a-ac45-4f41-9ed1-d565c082304a",
+    "title": "Learning Semantic Maps from Natural Language Descriptions",
+    "abstract": "This paper proposes an algorithm that enables robots to efficiently learn human-centric models of their environment from natural language descriptions. Typical semantic mapping approaches augment metric maps with higher-level properties of the robot's surroundings (e.g., place type, object locations), but do not use this information to improve the metric map. The novelty of our algorithm lies in fusing high-level knowledge, conveyed by speech, with metric information from the robot's low-level sensor streams. Our method jointly estimates a hybrid metric, topological, and semantic representation of the environment. This semantic graph provides a common framework in which we integrate concepts from natural language descriptions (e.g., labels and spatial relations) with metric observations from low-level sensors. Our algorithm efficiently maintains a factored distribution over semantic graphs based upon the stream of natural language and low-level sensor information. We evaluate the algorithm's performance and demonstrate that the incorporation of information from natural language increases the metric, topological and semantic accuracy of the recovered environment model.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "a5c9f030-0cd9-4cd3-a576-c49b9417fc0e",
+    "title": "Scarecrows in Oz: The Use of Large Language Models in HRI",
+    "abstract": "The proliferation of Large Language Models (LLMs) presents both a critical design challenge and a remarkable opportunity for the field of Human\u2013Robot Interaction (HRI). While the direct deployment of LLMs on interactive robots may be unsuitable for reasons of ethics, safety, and control, LLMs might nevertheless provide a promising baseline technique for many elements of HRI. Specifically, in this article, we argue for the use of LLMs as Scarecrows : \u201cbrainless,\u201d straw-man black-box modules integrated into robot architectures for the purpose of quickly enabling full-pipeline solutions, much like the use of \u201cWizard of Oz\u201d (WoZ) and other human-in-the-loop approaches. We explicitly acknowledge that these Scarecrows, rather than providing a satisfying or scientifically complete solution, incorporate a form of the wisdom of the crowd and, in at least some cases, will ultimately need to be replaced or supplemented by a robust and theoretically motivated solution. We provide examples of how Scarecrows could be used in language-capable robot architectures as useful placeholders and suggest initial reporting guidelines for authors, mirroring existing guidelines for the use and reporting of WoZ techniques.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "71024b1e-a2c1-4713-ba7a-8828e0f6a351",
+    "title": "Learning perceptually grounded word meanings from unaligned parallel data",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "da41c2dd-b259-4f41-897f-01b7eb2cabe2",
+    "title": "Biases in Large Language Models: Origins, Inventory, and Discussion",
+    "abstract": "In this article, we introduce and discuss the pervasive issue of bias in the large language models that are currently at the core of mainstream approaches to Natural Language Processing (NLP). We first introduce data selection bias, that is, the bias caused by the choice of texts that make up a training corpus. Then, we survey the different types of social bias evidenced in the text generated by language models trained on such corpora, ranging from gender to age, from sexual orientation to ethnicity, and from religion to culture. We conclude with directions focused on measuring, reducing, and tackling the aforementioned types of bias.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "725005db-7292-466e-9c92-a06a847c7dcc",
+    "title": "Pick and Place Control of a 3-DOF Robot Manipulator Based on Image and Pattern Recognition",
+    "abstract": "Board games like chess serve as an excellent testbed for human\u2013robot interactions, where advancements can lead to broader human\u2013robot cooperation systems. This paper presents a chess-playing robotic system to demonstrate controlled pick and place operations using a 3-DoF manipulator with image and speech recognition. The system identifies chessboard square coordinates through image processing and centroid detection before mapping them onto the physical board. User voice input is processed and transcribed into a string from which the system extracts the current and destination locations of a chess piece with a word error rate of 8.64%. Using an inverse-kinematics algorithm, the system calculates the joint angles needed to position the end effector at the desired coordinates actuating the robot. The developed system was evaluated experimentally on the 3-DoF manipulator with a voice command used to direct the robot movement in grasping a chess piece. Consideration was made involving both the own pieces as well as capturing the opponent\u2019s pieces and moving the captured piece outside the board workspace.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "35dfc5f9-cc5a-4307-ae0f-b1ac02a4cca4",
+    "title": "Prosodic Constructions",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "cc707ef9-b4c7-4fc4-acdf-134db8ce7327",
+    "title": "Natural Language Data Interfaces: A Data Access Odyssey (Invited Talk)",
+    "abstract": "Back in 1970\u2019s, E. F. Codd worked on a prototype of a natural language question and answer application that would sit on top of a relational database system. Soon, natural language interfaces for databases (NLIDBs) became the holy grail for the database community. Different approaches have been proposed from the database, machine learning and NLP communities. Interest in the topic has had its peaks and valleys. After a long and adventurous journey of almost 50 years, there is a rekindled interest in NLIDBs in recent years, fueled by the need for democratizing data access and by the recent advances in deep learning and natural language processing in particular. There is a surge of works on natural language interfaces for databases using neural translation, and suddenly it becomes hard to keep up with advancements in the field. Are we close to finding the holy grail of data access? What are the lurking challenges that we need to surpass and what research opportunities arise? Finally, what is the role of the database community?",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "3e9ec807-316d-424c-86c3-698ecbff72db",
+    "title": "RT-1: Robotics Transformer for Real-World Control at Scale",
+    "abstract": "By transferring knowledge from large, diverse, taskagnostic datasets, modern machine learning models can solve specific downstream tasks either zero-shot or with small taskspecific datasets to a high level of performance.While this capability has been demonstrated in other fields such as computer vision, natural language processing or speech recognition, it remains to be shown in robotics, where the generalization capabilities of the models are particularly critical due to the difficulty of collecting real-world robotic data.We argue that one of the keys to the success of such general robotic models lies with open-ended task-agnostic training, combined with highcapacity architectures that can absorb all of the diverse, robotic data.In this paper, we present a model class, dubbed Robotics Transformer, that exhibits promising scalable model properties.We verify our conclusions in a study of different model classes and their ability to generalize as a function of the data size, model size, and data diversity based on a large-scale data collection on real robots performing real-world tasks.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "79f4e5a8-5a0d-43b4-aeaf-2aed2c1865b5",
+    "title": "Foundation models for geospatial reasoning: assessing the capabilities of large language models in understanding geometries and topological spatial relations",
+    "abstract": "Applying AI foundation models directly to geospatial datasets remains challenging due to their limited ability to represent and reason with geographical entities, specifically vector-based geometries and natural language descriptions of complex spatial relations. To address these issues, we investigate the extent to which a well-known-text (WKT) representation of geometries and their spatial relations (e.g., topological predicates) are preserved during spatial reasoning when the geospatial vector data are passed to large language models (LLMs) including GPT-3.5-turbo, GPT-4, and DeepSeek-R1-14B. Our workflow employs three distinct approaches to complete the spatial reasoning tasks for comparison, i.e., geometry embedding-based, prompt engineering-based, and everyday language-based evaluation. Our experiment results demonstrate that both the embedding-based and prompt engineering-based approaches to geospatial question-answering tasks with GPT models can achieve an accuracy of over 0.6 on average for the identification of topological spatial relations between two geometries. Among the evaluated models, GPT-4 with few-shot prompting achieved the highest performance with over 0.66 accuracy on topological spatial relation inference. Additionally, GPT-based reasoner is capable of properly comprehending inverse topological spatial relations and including an LLM-generated geometry can enhance the effectiveness for geographic entity retrieval. GPT-4 also exhibits the ability to translate certain vernacular descriptions about places into formal topological relations, and adding the geometry-type or place-type context in prompts may improve inference accuracy, but it varies by instance. The performance of these spatial reasoning tasks offers valuable insights for the refinement of LLMs with geographical knowledge towards the development of geo-foundation models capable of geospatial reasoning.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "044ee17d-87c3-428d-acd4-6485f86a1fcb",
+    "title": "Robot speech: how variability matters for child\u2013robot interactions",
+    "abstract": "Spoken language is one of the most powerful tools for humans to learn, exchange information, and build social relationships. An inherent feature of spoken language is large within- and between-speaker variation across linguistic levels, from sound acoustics to prosodic, lexical, syntactic, and pragmatic choices that differ from written language. Despite advancements in text-to-speech and language models used in social robots, synthetic speech lacks human-like variability. This limitation is especially critical in interactions with children, whose developmental needs require adaptive speech input and ethically responsible design. In child-robot interaction research, robot speech design has received less attention than appearance or multimodal features. We argue that speech variability in robots needs closer examination, considering both how humans adapt to robot speech and how robots could adjust to human speech. We discuss three tensions: (1) feasibility, because dynamic human speech variability is technically challenging to model; (2) desirability, because variability may both enhance and hinder learning, usability, and trust; and (3) ethics, because digital human-like speech risks deception, while robot speech varieties may support transparency. We suggest approaching variability as a design tool while being transparent about the robot's role and capabilities. The key question is which types of variation benefit children's socio-cognitive and language learning, at which developmental stage, in which context, depending on the robot's role and persona. Integrating insights across disciplines, we outline directions for studying how specific dimensions of variability affect comprehension, engagement, language learning, and for developing vocal interactivity that is engaging, ethically transparent, and developmentally appropriate.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "69836270-2067-43e7-91f3-b79af3679eaa",
+    "title": "Using English for Indexing and Retrieving",
+    "abstract": "This paper describes a natural language system, START. The system analyzes English text and automatically transforms it into an appropriate representation, the {\\it knowledge base}, which incorporates the information found in the text. The user gains access to information stored in the knowledge base by querying it in English. The system analyzes the query and decides through a matching process what information in the knowledge base is relevant to the question. Then it retrieves this information and formulates its response in English.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "01a248f1-84ca-46e4-a16d-3eae8b4a5f5b",
+    "title": "Collaborative effort towards common ground in situated human-robot dialogue",
+    "abstract": "In situated human-robot dialogue, although humans and robots are co-present in a shared environment, they have significantly mismatched capabilities in perceiving the shared environment. Their representations of the shared world are misaligned. In order for humans and robots to communicate with each other successfully using language, it is important for them to mediate such differences and to establish common ground. To address this issue, this paper describes a dialogue system that aims to mediate a shared perceptual basis during human-robot dialogue. In particular, we present an empirical study that examines the role of the robot's collaborative effort and the performance of natural language processing modules in dialogue grounding. Our empirical results indicate that in situated human-robot dialogue, a low collaborative effort from the robot may lead its human partner to believe a common ground is established. However, such beliefs may not reflect true mutual understanding. To support truly grounded dialogues, the robot should make an extra effort by making its partner aware of its internal representation of the shared world.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "6a0241fe-ef1e-44af-87c8-1e2948a1a4ca",
+    "title": "Scalable training of<i>L</i><sup>1</sup>-regularized log-linear models",
+    "abstract": "The L-BFGS limited-memory quasi-Newton method is the algorithm of choice for optimizing the parameters of large-scale log-linear models with L2 regularization, but it cannot be used for an L1-regularized loss due to its non-differentiability whenever some parameter is zero. Efficient algorithms have been proposed for this task, but they are impractical when the number of parameters is very large. We present an algorithm Orthant-Wise Limited-memory Quasi-Newton (OWL-QN), based on L-BFGS, that can efficiently optimize the L1-regularized log-likelihood of log-linear models with millions of parameters. In our experiments on a parse reranking task, our algorithm was several orders of magnitude faster than an alternative algorithm, and substantially faster than L-BFGS on the analogous L2-regularized problem. We also present a proof that OWL-QN is guaranteed to converge to a globally optimal parameter vector.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "9b3a1454-e208-417a-8f98-e7718e7ed69a",
+    "title": "Gaze-supported Large Language Model Framework for Bi-directional Human-Robot Interaction",
+    "abstract": "The rapid development of Large Language Models (LLMs) creates an exciting potential for flexible, general knowledge-driven Human-Robot Interaction (HRI) systems for assistive robots. Existing HRI systems demonstrate great progress in interpreting and following user instructions, action generation, and robot task solving. On the other hand, bi-directional, multimodal, and context-aware support of the user in collaborative tasks still remains an open challenge. In this paper, we present a gaze- and speech-informed interface to the assistive robot, which is able to perceive the working environment from multiple vision inputs and support the dynamic user in their tasks. Our system is designed to be modular and transferable to adapt to diverse tasks and robots, and it is real-time capable due to the language-based interaction state representation and fast on-board perception modules. Its development was supported by multiple public dissemination events, contributing important considerations for improved robustness and user experience. Furthermore, in a lab study, we compare the performance and user ratings of our system with those of a traditional scripted HRI pipeline. Our findings indicate that an LLM-based approach enhances adaptability and marginally improves user engagement and task execution metrics but may produce redundant output, while a scripted pipeline is well suited for more straightforward tasks.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "57893c1f-70a9-4c7c-b953-b9269f4e0844",
+    "title": "Jointly Learning to Parse and Perceive: Connecting Natural Language to the Physical World",
+    "abstract": "This paper introduces Logical Semantics with Perception (LSP), a model for grounded language acquisition that learns to map natural language statements to their referents in a physical environment. For example, given an image, LSP can map the statement \u201cblue mug on the table\u201d to the set of image segments showing blue mugs on tables. LSP learns physical representations for both categorical (\u201cblue,\u201d \u201cmug\u201d) and relational (\u201con\u201d) language, and also learns to compose these representations to produce the referents of entire statements. We further introduce a weakly supervised training procedure that estimates LSP\u2019s parameters using annotated referents for entire statements, without annotated referents for individual words or the parse structure of the statement. We perform experiments on two applications: scene understanding and geographical question answering. We find that LSP outperforms existing, less expressive models that cannot represent relational language. We further find that weakly supervised training is competitive with fully supervised training while requiring significantly less annotation effort.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "c26aed62-1c67-4ed3-a570-7800eb21e217",
+    "title": "Asking for Help Using Inverse Semantics",
+    "abstract": "Robots inevitably fail, often without the ability to recover autonomously. We demonstrate an approach for enabling a robot to recover from failures by communicating its need for specific help to a human partner using natural language. Our approach automatically detects failures, then generates targeted spoken-language requests for help such as \"Please give me the white table leg that is on the black table.\" Once the human partner has repaired the failure condition, the system resumes full autonomy. We present a novel inverse semantics algorithm for generating effective help requests. In contrast to forward semantic models that interpret natural language in terms of robot actions and perception, our inverse semantics algorithm generates requests by emulating the human's ability to interpret a request using the Generalized Grounding Graph (G 3 ) framework. To assess the effectiveness of our approach, we present a corpusbased online evaluation, as well as an end-to-end user study, demonstrating that our approach increases the effectiveness of human interventions compared to static requests for help.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "c7ddbd84-186d-4580-8903-ee64006498fc",
+    "title": "ConceptAgent: LLM-Driven Precondition Grounding and Tree Search for Robust Task Planning and Execution",
+    "abstract": "Robotic planning and execution in open-world environments is a complex problem due to the vast state spaces and high variability of task embodiment. Recent advances in perception algorithms, combined with Large Language Models (LLMs) for planning, offer promising solutions to these challenges, as the common sense reasoning capabilities of LLMs provide a strong heuristic for efficiently searching the action space. However, prior work fails to address the possibility of hallucinations from LLMs, which results in failures to execute the planned actions largely due to logical fallacies at high-or low-levels. To contend with automation failure due to such hallucinations, we introduce ConceptAgent, a natural language-driven robotic platform designed for task execution in unstructured environments. With a focus on scalability and reliability of LLM-based planning in complex state and action spaces, we present innovations designed to limit these shortcomings, including 1) Predicate Grounding to prevent and recover from infeasible actions, and 2) an embodied version of LLM-guided Monte Carlo Tree Search with self reflection. ConceptAgent combines these planning enhancements with dynamic language aligned 3d scene graphs, and large multi-modal pretrained models to perceive, localize, and interact with its environment, enabling reliable task completion. In simulation experiments, ConceptAgent achieved a 19% task completion rate across three room layouts and 30 easy level embodied tasks outperforming other state-of-the-art LLM-driven reasoning baselines that scored 10.26% and 8.11% on the same benchmark. Additionally, ablation studies on moderate to hard embodied tasks revealed a 20% increase in task completion from the baseline agent to the fully enhanced ConceptAgent, highlighting the individual and combined contributions of Predicate Grounding and LLM-guided Tree Search to enable more robust automation in complex state and action spaces. Additionally, in real-world mobile manipulation trials, conducted in randomized, low-clutter environments, a ConceptAgent-driven Spot robot achieved a 40% task completion rate, demonstrating the performance of our perception system in real-world scenarios.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "c5ce1214-04d3-485f-b167-4654d608811b",
+    "title": "Learning to follow navigational route instructions",
+    "abstract": "We have developed a simulation model that accepts instructions in unconstrained natural language, and then guides a robot to the correct destination. The instructions are segmented on the basis of the actions to be taken, and each segment is labeled with the required action. This flat formulation reduces the problem to a sequential labeling task, to which machine learning methods are applied. We propose an innovative machine learning method for explicitly modeling the actions described in instructions and integrating learning and inference about the physical environment. We obtained a corpus of 840 route instructions that experimenters verified as follow-able, given by people in building navigation situations. Using the four-fold cross validation, our experiments showed that the simulated robot reached the correct destination 88 % of the time. 1",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "276b96f2-84c9-4ed7-9a9b-98493592ead1",
+    "title": "Should robots be polite? Expectations about politeness in human\u2013robot interaction",
+    "abstract": "Interaction with artificial social agents is often designed based on models of human interaction and dialogue. While this is certainly useful for basic interaction mechanisms, it has been argued that social communication strategies and social language use, a \"particularly human\" ability, may not be appropriate and transferable to interaction with artificial conversational agents. In this paper, we present qualitative research exploring whether users expect artificial agents to use politeness-a fundamental mechanism of social communication-in language-based human-robot interaction. Based on semi-structured interviews, we found that humans mostly ascribe a functional, rule-based use of polite language to humanoid robots and do not expect them to apply socially motivated politeness strategies that they expect in human interaction. This study 1) provides insights for interaction design for social robots' politeness use from a user perspective, and 2) contributes to politeness research based on the analysis of our participants' perspectives on politeness.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "eb165a17-a5ee-487e-863e-dfd6c6d1cde1",
+    "title": "Integrating Large Language Models with Multimodal Virtual Reality Interfaces to Support Collaborative Human\u2013Robot Construction Work",
+    "abstract": "In the construction industry, where work environments are complex, unstructured and often dangerous, the implementation of human\u2013robot collaboration (HRC) is emerging as a promising advancement. This underlines the critical need for intuitive communication interfaces that enable construction workers to collaborate seamlessly with robotic assistants. This study introduces a conversational virtual reality (VR) interface integrating multimodal interaction to enhance intuitive communication between construction workers and robots. By integrating voice and controller inputs with the robot operating system (ROS), building information modeling (BIM), and a game engine featuring a chat interface powered by a large language model (LLM), the proposed system enables intuitive and precise interaction within a VR setting. Evaluated by 12 construction workers through a drywall installation case study, the proposed system demonstrated its low workload and high intuitiveness and ease of use with succinct command inputs. The proposed multimodal interaction system suggests that such technological integration can substantially advance the integration of robotic assistants in the construction industry.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "91d33bed-a4ef-4105-a3a6-f15fe5c31fbc",
+    "title": "Evaluating speech-in-speech perception via a humanoid robot",
+    "abstract": "Overall, the study presents the potential of the NAO for presenting speech materials and collecting psychophysical measurements for speech-in-speech perception.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "a124a51d-886a-4e21-9a2d-4cd7f46615e9",
+    "title": "The Benefits of Interactions with Physically Present Robots over\u00a0Video-Displayed Agents",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "borderline",
+    "rejection_reason": "The title does not indicate a focus on language or speech interaction with robots, and without an abstract it is unclear whether the study involves human-centered evaluation of such interactions. Therefore it does not meet the inclusion criteria."
+  },
+  {
+    "paper_id": "46261867-6a0d-47d1-b360-4bf9a00f1673",
+    "title": "Occluded object search by relational affordances",
+    "abstract": "Searching for objects in occluded spaces is one of the problems robots need to solve when tackling mobile manipulation tasks. Most approaches focus only on searching for a specific object. In this paper, we use the concept of relational affordances to improve occluded object search performance. Affordances define action possibilities on an object in the environment and play a role in basic cognitive capabilities. Relational affordances extend this concept by modelling relations between multiple objects. By learning and using a relational affordance model we can search for any of the multiple objects that afford a given action, each object type having a probability distribution over possible sizes and shapes, and where spatial relations between objects such as co-occurrence and stacking are modelled. The experimental results show the viability of the relational affordance models for occluded object search.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "5ccc91b7-f943-4200-aaf2-669601fb5d72",
+    "title": "Sonic Sleight of Hand: Sound Induces Illusory Distortions in the Perception and Prediction of Robot Action",
+    "abstract": "The online version contains supplementary material available at 10.1007/s12369-024-01105-5.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "988aeecf-6c46-4940-b07b-d2b5738c7cd3",
+    "title": "Back to the Blocks World: Learning New Actions through Situated Human-Robot Dialogue",
+    "abstract": "This paper describes an approach for a robotic arm to learn new actions through dialogue in a simplified blocks world.In particular, we have developed a threetier action knowledge representation that on one hand, supports the connection between symbolic representations of language and continuous sensorimotor representations of the robot; and on the other hand, supports the application of existing planning algorithms to address novel situations.Our empirical studies have shown that, based on this representation the robot was able to learn and execute basic actions in the blocks world.When a human is engaged in a dialogue to teach the robot new actions, step-by-step instructions lead to better learning performance compared to one-shot instructions.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "0bac29ec-8484-44f1-b841-48ef2421b63d",
+    "title": "Robotic interfaces for cognitive psychology and embodiment research: A research roadmap",
+    "abstract": "Advanced human-machine interfaces render robotic devices applicable to study and enhance human cognition. This turns robots into formidable neuroscientific tools to study processes such as the adaptation between a human operator and the operated robotic device and how this adaptation modulates human embodiment and embodied cognition. We analyze bidirectional human-machine interface (bHMI) technologies for transparent information transfer between a human and a robot via efferent and afferent channels. Even if such interfaces have a tremendous positive impact on feedback loops and embodiment, advanced bHMIs face immense technological challenges. We critically discuss existing technical approaches, mainly focusing on haptics, and suggest extensions thereof, which include other aspects of touch. Moreover, we point out other potential constraints such as limited functionality, semi-autonomy, intent-detection, and feedback methods. From this, we develop a research roadmap to guide understanding and development of bidirectional human-machine interfaces that enable robotic experiments to empirically study the human mind and embodiment. We conclude the integration of dexterous control and multisensory feedback to be a promising roadmap towards future robotic interfaces, especially regarding applications in the cognitive sciences. This article is categorized under: Computer Science > Robotics Psychology > Motor Skill and Performance Neuroscience > Plasticity.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "fdf51d4e-aadb-4403-a831-ec7df591dd2a",
+    "title": "The fundamental system of spatial schemas in language",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "79512f3f-ef2b-4ec2-83d5-384779b36113",
+    "title": "Tell me Dave: Context-sensitive grounding of natural language to manipulation instructions",
+    "abstract": "It is important for a robot to be able to interpret natural language commands given by a human. In this paper, we consider performing a sequence of mobile manipulation tasks with instructions described in natural language. Given a new environment, even a simple task such as boiling water would be performed quite differently depending on the presence, location and state of the objects. We start by collecting a dataset of task descriptions in free-form natural language and the corresponding grounded task-logs of the tasks performed in an online robot simulator. We then build a library of verb\u2013environment instructions that represents the possible instructions for each verb in that environment, these may or may not be valid for a different environment and task context. We present a model that takes into account the variations in natural language and ambiguities in grounding them to robotic instructions with appropriate environment context and task constraints. Our model also handles incomplete or noisy natural language instructions. It is based on an energy function that encodes such properties in a form isomorphic to a conditional random field. We evaluate our model on tasks given in a robotic simulator and show that it successfully outperforms the state of the art with 61.8% accuracy. We also demonstrate a grounded robotic instruction sequence on a PR2 robot using the Learning from Demonstration approach.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "90e6bc6c-9682-4a4f-8651-3ad32ee2f8f5",
+    "title": "Real-time natural language corrections for assistive robotic manipulators",
+    "abstract": "We propose a generalizable natural language interface that allows users to provide corrective instructions to an assistive robotic manipulator in real-time. This work is motivated by the desire to improve collaboration between humans and robots in a home environment. Allowing human operators to modify properties of how their robotic counterpart achieves a goal on-the-fly increases the utility of the system by incorporating the strengths of the human partner (e.g. visual acuity and environmental knowledge). This work is applicable to users with and without disability. Our natural language interface is based on the distributed correspondence graph, a probabilistic graphical model that assigns semantic meaning to user utterances in the context of the robot\u2019s environment and current behavior. We then use the desired corrections to alter the behavior of the robotic manipulator by treating the modifications as constraints on the motion generation (planning) paradigm. In this paper, we highlight four dimensions along which a user may wish to correct the behavior of his or her assistive manipulator. We develop our language model using data collected from Amazon Mechanical Turk to capture a comprehensive sample of terminology that people use to describe desired corrections. We then develop an end-to-end system using open-source speech-to-text software and a Kinova Robotics MICO robotic arm. To demonstrate the efficacy of our approach, we run a pilot study with users unfamiliar with robotic systems and analyze points of failure and future directions.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "9a748616-4870-4cf3-83ff-f6d10197a3a8",
+    "title": "Quadruped Robots: Bridging Mechanical Design, Control, and Applications",
+    "abstract": "Quadruped robots have emerged as a prominent field of research due to their exceptional mobility and adaptability in complex terrains. This paper presents an overview of quadruped robots, encompassing their design principles, control mechanisms, perception systems, and applications across various industries. We review the historical evolution and technological milestones that have shaped quadruped robotics. To understand their impact on performance and functionality, key aspects of mechanical design are analyzed, including leg configurations, actuation systems, and material selection. Control strategies for locomotion, balance, and navigation are all examined, highlighting the integration of artificial intelligence and machine learning to enhance adaptability and autonomy. This review also explores perception and sensing technologies that enable environmental interaction and decision-making capabilities. Furthermore, we systematically examine the diverse applications of quadruped robots in sectors including the military, search and rescue, industrial inspection, agriculture, and entertainment. Finally, we address challenges and limitations, including technical hurdles, ethical considerations, and regulatory issues, and propose future research directions to advance the field. By structuring this review as a systematic study, we ensure clarity and a comprehensive understanding of the domain, making it a valuable resource for researchers and engineers in quadruped robotics.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "42797e49-332f-4642-bddb-0f4d61bd82f6",
+    "title": "Imitation learning for natural language direction following through unknown environments",
+    "abstract": "The use of spoken instructions in human-robot teams holds the promise of enabling untrained users to effectively control complex robotic systems in a natural and intuitive way. Providing robots with the capability to understand natural language directions would enable effortless coordination in human robot teams that operate in non-specialized unknown environments. However, natural language direction following through unknown environments requires understanding the meaning of language, using a partial semantic world model to generate actions in the world, and reasoning about the environment and landmarks that have not yet been detected. We address the problem of robots following natural language directions through complex unknown environments. By exploiting the structure of spatial language, we can frame direction following as a problem of sequential decision making under uncertainty. We learn a policy which predicts a sequence of actions that follow the directions by exploring the environment and discovering landmarks, backtracking when necessary, and explicitly declaring when it has reached the destination. We use imitation learning to train the policy, using demonstrations of people following directions. By training explicitly in unknown environments, we can generalize to situations that have not been encountered previously.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "a28328b9-75cc-446c-a180-75cbdc2ea0b7",
+    "title": "Between reality and delusion: challenges of applying large language models to companion robots for open-domain dialogues with older adults",
+    "abstract": "Abstract Throughout our lives, we interact daily in conversations with our friends and family, covering a wide range of topics, known as open-domain dialogue. As we age, these interactions may diminish due to changes in social and personal relationships, leading to loneliness in older adults. Conversational companion robots can alleviate this issue by providing daily social support. Large language models (LLMs) offer flexibility for enabling open-domain dialogue in these robots. However, LLMs are typically trained and evaluated on textual data, while robots introduce additional complexity through multi-modal interactions, which has not been explored in prior studies. Moreover, it is crucial to involve older adults in the development of robots to ensure alignment with their needs and expectations. Correspondingly, using iterative participatory design approaches, this paper exposes the challenges of integrating LLMs into conversational robots, deriving from 34 Swedish-speaking older adults\u2019 (one-to-one) interactions with a personalized companion robot, built on Furhat robot with GPT $$-$$ <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"> <mml:mo>-</mml:mo> </mml:math> 3.5. These challenges encompass disruptions in conversations, including frequent interruptions, slow, repetitive, superficial, incoherent, and disengaging responses, language barriers, hallucinations, and outdated information, leading to frustration, confusion, and worry among older adults. Drawing on insights from these challenges, we offer recommendations to enhance the integration of LLMs into conversational robots, encompassing both general suggestions and those tailored to companion robots for older adults.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "d5a5e0bf-6749-4b4a-80f6-f7e9b449f468",
+    "title": "Trust in Robots: Challenges and Opportunities",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "fea7844c-b3a2-4e4e-8841-fad048101f0f",
+    "title": "Prompt, Plan, Perform: LLM-based Humanoid Control via Quantized Imitation Learning",
+    "abstract": "In recent years, reinforcement learning and imitation learning have shown great potential for controlling humanoid robots\u2019 motion. However, these methods typically create simulation environments and rewards for specific tasks, resulting in the requirements of multiple policies and limited capabilities for tackling complex and unknown tasks. To overcome these issues, we present a novel approach that combines adversarial imitation learning with large language models (LLMs). This innovative method enables the agent to learn reusable skills with a single policy and solve zero-shot tasks under the guidance of LLMs. In particular, we utilize the LLM as a strategic planner for applying previously learned skills to novel tasks through the comprehension of task-specific prompts. This empowers the robot to perform the specified actions in a sequence. To improve our model, we incorporate codebook-based vector quantization, allowing the agent to generate suitable actions in response to unseen textual commands from LLMs. Furthermore, we design general reward functions that consider the distinct motion features of humanoid robots, ensuring the agent imitates the motion data while maintaining goal orientation without additional guiding direction approaches or policies. To the best of our knowledge, this is the first framework that controls humanoid robots using a single learning policy network and LLM as a planner. Extensive experiments demonstrate that our method exhibits efficient and adaptive ability in complicated motion tasks.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "70f5009d-bb8e-48d2-9304-2c84223284e4",
+    "title": "Perception of Power and Distance in Human-Human and Human-Robot Role-Based Relations",
+    "abstract": "The use and interpretation of social linguistic strategies such as politeness is influenced by multiple factors, e.g., the speaker-hearer relation. Such relations influence an inter-locutor's expectations regarding the interaction and thus also its perception. This makes speaker-hearer relations constituting a partner model highly relevant for the user experience in human-robot interaction as well. This paper presents a questionnaire-based study on the perception of human-robot relations in comparison to human-human relations across different roles (e.g., colleague, assistant) and spaces of interaction (home, work, public). It was found that participants perceive robots differently based on space, as they do for human-human relations in corresponding roles. Overall, humans were evaluated to have more power over and more distance to a robot interaction partner compared to another human. Our results provide insights into an intuitive interaction-initial partner model based on roles.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "56a4e67b-a40a-48f4-9466-8c9de8598739",
+    "title": "Computer Vision and Natural Language Processing",
+    "abstract": "Integrating computer vision and natural language processing is a novel interdisciplinary field that has received a lot of attention recently. In this survey, we provide a comprehensive introduction of the integration of computer vision and natural language processing in multimedia and robotics applications with more than 200 key references. The tasks that we survey include visual attributes, image captioning, video captioning, visual question answering, visual retrieval, human-robot interaction, robotic actions, and robot navigation. We also emphasize strategies to integrate computer vision and natural language processing models as a unified theme of distributional semantics. We make an analog of distributional semantics in computer vision and natural language processing as image embedding and word embedding, respectively. We also present a unified view for the field and propose possible future directions.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "c1a47572-d491-47cd-aa07-a4fd1205d28c",
+    "title": "Semantically controllable augmentations for generalizable robot learning",
+    "abstract": "Generalization to unseen real-world scenarios for robot manipulation requires exposure to diverse datasets during training. However, collecting large real-world datasets is intractable due to high operational costs. For robot learning to generalize despite these challenges, it is essential to leverage sources of data or priors beyond the robot\u2019s direct experience. In this work, we posit that image-text generative models, which are pre-trained on large corpora of web-scraped data, can serve as such a data source. These generative models encompass a broad range of real-world scenarios beyond a robot\u2019s direct experience and can synthesize novel synthetic experiences that expose robotic agents to additional world priors aiding real-world generalization at no extra cost. In particular, our approach leverages pre-trained generative models as an effective tool for data augmentation. We propose a generative augmentation framework for semantically controllable augmentations and rapidly multiplying robot datasets while inducing rich variations that enable real-world generalization. Based on diverse augmentations of robot data, we show how scalable robot manipulation policies can be trained and deployed both in simulation and in unseen real-world environments such as kitchens and table-tops. By demonstrating the effectiveness of image-text generative models in diverse real-world robotic applications, our generative augmentation framework provides a scalable and efficient path for boosting generalization in robot learning at no extra human cost.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "ec398f9e-bdc3-43c3-b63b-cc5cf5ace33e",
+    "title": "Unified Pragmatic Models for Generating and Following Instructions",
+    "abstract": "Daniel Fried, Jacob Andreas, Dan Klein. Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long Papers). 2018.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "1849bde7-5e3d-4b5b-9a10-80a8596159d8",
+    "title": "Social Eye Gaze in Human-Robot Interaction: A Review",
+    "abstract": "This article reviews the state of the art in social eye gaze for human-robot interaction (HRI). It establishes three categories of gaze research in HRI, defined by differences in goals and methods: a human-centered approach, which focuses on people's responses to gaze; a design-centered approach, which addresses the features of robot gaze behavior and appearance that improve interaction; and a technology-centered approach, which is concentrated on the computational tools for implementing social eye gaze in robots. This paper begins with background information about gaze research in HRI and ends with a set of open questions.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "b26dec0f-be2f-4803-b88e-783f5ef49ed8",
+    "title": "Joint prosody prediction and unit selection for concatenative speech synthesis",
+    "abstract": "We describe how prosody prediction can be efficiently integrated with the unit selection process in a concatenative speech synthesizer under a weighted finite-state transducer (WFST) architecture. WFSTs representing prosody prediction and unit selection can be composed during synthesis, thus effectively expanding the space of possible prosodic targets. We implemented a symbolic prosody prediction module and a unit selection database as the synthesis components of a travel planning system. Results of perceptual experiments show that by combining the steps of prosody prediction and unit selection we are able to achieve improved naturalness of synthetic speech compared to the sequential implementation.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "657276f4-9868-444a-b98e-1e3ef6903531",
+    "title": "Natural language programming of industrial robots",
+    "abstract": "In this paper, we introduce a method to use written natural language instructions to program assembly tasks for industrial robots. In our application, we used a state-of-the-art semantic and syntactic parser together with semantically rich world and skill descriptions to create high-level symbolic task sequences. From these sequences, we generated executable code for both virtual and physical robot systems. Our focus lays on the applicability of these methods in an industrial setting with real-time constraints.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "c7eb4d30-0839-4ecc-a9b7-682c33e5885a",
+    "title": "UniMODE: Unified Monocular 3D Object Detection",
+    "abstract": "Realizing unified monocular 3D object detection, including both indoor and outdoor scenes, holds great importance in applications like robot navigation. However, involving various scenarios of data to train models poses challenges due to their significantly different characteristics, e.g., di-verse geometry properties and heterogeneous domain distributions. To address these challenges, we build a detector based on the bird's-eye-view (BEV) detection paradigm, where the explicit feature projection is beneficial to ad-dressing the geometry learning ambiguity when employing multiple scenarios of data to train detectors. Then, we split the classical BEV detection architecture into two stages and propose an uneven BEV grid design to handle the convergence instability caused by the aforementioned challenges. Moreover, we develop a sparse BEV feature projection strategy to reduce computational cost and a unified do-main alignment method to handle heterogeneous domains. Combining these techniques, a unified detector UniMODE is derived, which surpasses the previous state-of-the-art on the challenging Omni3D dataset (a large-scale dataset including both indoor and outdoor scenes) by 4.9% AP3D, revealing the first successful generalization of a BEV detector to unified 3D object detection.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "fec50fce-fa69-49db-8cde-97fd3c016f92",
+    "title": "Foundations &amp; Trends in Multimodal Machine Learning: Principles, Challenges, and Open Questions",
+    "abstract": "Multimodal machine learning is a vibrant multi-disciplinary research field that aims to design computer agents with intelligent capabilities such as understanding, reasoning, and learning through integrating multiple communicative modalities, including linguistic, acoustic, visual, tactile, and physiological messages. With the recent interest in video understanding, embodied autonomous agents, text-to-image generation, and multisensor fusion in application domains such as healthcare and robotics, multimodal machine learning has brought unique computational and theoretical challenges to the machine learning community given the heterogeneity of data sources and the interconnections often found between modalities. However, the breadth of progress in multimodal research has made it difficult to identify the common themes and open questions in the field. By synthesizing a broad range of application domains and theoretical frameworks from both historical and recent perspectives, this article is designed to provide an overview of the computational and theoretical foundations of multimodal machine learning. We start by defining three key principles of modality heterogeneity , connections , and interactions that have driven subsequent innovations, and propose a taxonomy of six core technical challenges: representation , alignment , reasoning , generation , transference , and quantification covering historical and recent trends. Recent technical achievements will be presented through the lens of this taxonomy, allowing researchers to understand the similarities and differences across new approaches. We end by motivating several open problems for future research as identified by our taxonomy.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "a05964d7-a6b7-41ad-a5d3-2c2e4a1d0a39",
+    "title": "VirtualHome: Simulating Household Activities Via Programs",
+    "abstract": "In this paper, we are interested in modeling complex activities that occur in a typical household. We propose to use programs, i.e., sequences of atomic actions and interactions, as a high level representation of complex tasks. Programs are interesting because they provide a non-ambiguous representation of a task, and allow agents to execute them. However, nowadays, there is no database providing this type of information. Towards this goal, we first crowd-source programs for a variety of activities that happen in people's homes, via a game-like interface used for teaching kids how to code. Using the collected dataset, we show how we can learn to extract programs directly from natural language descriptions or from videos. We then implement the most common atomic (inter)actions in the Unity3D game engine, and use our programs to \"drive\" an artificial agent to execute tasks in a simulated household environment. Our VirtualHome simulator allows us to create a large activity video dataset with rich ground-truth, enabling training and testing of video understanding models. We further showcase examples of our agent performing tasks in our VirtualHome based on language descriptions.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "ade041a9-26a0-491c-80b4-fe2a085720de",
+    "title": "What will be the possible barriers to consumers\u2019 adoption of smart home services?",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "5dbdfcf3-0667-482d-9732-4fee46534884",
+    "title": "Report from the NSF Future Directions Workshop, Toward User-Oriented Agents: Research Directions and Challenges",
+    "abstract": "This USER Workshop was convened with the goal of defining future research directions for the burgeoning intelligent agent research community and to communicate them to the National Science Foundation. It took place in Pittsburgh Pennsylvania on October 24 and 25, 2019 and was sponsored by National Science Foundation Grant Number IIS-1934222. Any opinions, findings and conclusions or future directions expressed in this document are those of the authors and do not necessarily reflect the views of the National Science Foundation. The 27 participants presented their individual research interests and their personal research goals. In the breakout sessions that followed, the participants defined the main research areas within the domain of intelligent agents and they discussed the major future directions that the research in each area of this domain should take",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "79acf1ad-b678-4b6a-8a14-cfc30059b259",
+    "title": "What you see is where you go",
+    "abstract": "Individuals with severe multiple disabilities have little or no opportunity to express their own wishes, make choices and move independently. Because of this, the objective of this work has been to develop a prototype for a gaze-driven device to manoeuvre powered wheelchairs or other moving platforms.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "7bf6fd08-a94c-4beb-9372-f7b9d925f926",
+    "title": "Shared Autonomy of a Robotic Manipulator for Grasping Under Human Intent Uncertainty Using POMDPs",
+    "abstract": "In shared autonomy (SA), accurate user intent prediction is crucial for good robot assistance and avoiding user\u2013robot conflicts. Prior works have relied on passive observation of joystick inputs to predict user intent, which works when the goals are clearly separated or when a common policy exists for multiple goals. However, they may not work well when grasping objects to perform daily activities, as there are multiple ways to grasp the same object. We demonstrate the need for active information-gathering in such cases and show how this can be done in a principled manner by formulating SA as a discrete action partially observable Markov decision process (POMDP), reasoning over high-level actions. One of our insights is that apart from having explicit information-gathering actions and goal-oriented actions, it is important to have actions that move toward a distribution of goals and provide no assistance in the POMDP action space. Compared with a method with no active information-gathering, our method performs tasks faster, requires less user input, and decreases opposing actions, especially for more complex objects, getting higher ratings and preference in our user study.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "15e539b4-a9c9-4afd-bc3a-f4111f98e72f",
+    "title": "Code as Policies: Language Model Programs for Embodied Control",
+    "abstract": "Large language models (LLMs) trained on code-completion have been shown to be capable of synthesizing simple Python programs from docstrings [1]. We find that these code-writing LLMs can be re-purposed to write robot policy code, given natural language commands. Specifically, policy code can express functions or feedback loops that process perception outputs (e.g., from object detectors [2], [3]) and parameterize control primitive APIs. When provided as input several example language commands (formatted as comments) followed by corresponding policy code (via few-shot prompting), LLMs can take in new commands and autonomously re-compose API calls to generate new policy code respectively. By chaining classic logic structures and referencing third-party libraries (e.g., NumPy, Shapely) to perform arithmetic, LLMs used in this way can write robot policies that (i) exhibit spatial-geometric reasoning, (ii) generalize to new instructions, and (iii) prescribe precise values (e.g., velocities) to ambiguous descriptions (\u2018faster\u2019) depending on context (i.e., behavioral commonsense). This paper presents Code as Policies: a robot-centric formulation of language model generated programs (LMPs) that can represent reactive policies (e.g., impedance controllers), as well as waypoint-based policies (vision-based pick and place, trajectory-based control), demonstrated across multiple real robot platforms. Central to our approach is prompting hierarchical code-gen (recursively defining undefined functions), which can write more complex code and also improves state-of-the-art to solve 39.8% of problems on the HumanEval [1] benchmark. Code and videos are available at https://code-as-policies.github.io",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "fdd0d2e1-41ee-4523-ab79-d11aded92d30",
+    "title": "Integrating action knowledge and LLMs for task planning and situation handling in open worlds",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "bcf411b3-aae7-4a7b-9673-1c5b7bc3ebb8",
+    "title": "Robot Programming by Demonstration with situated spatial language understanding",
+    "abstract": "Robot Programming by Demonstration (PbD) allows users to program a robot by demonstrating the desired behavior. Providing these demonstrations typically involves moving the robot through a sequence of states, often by physically manipulating it. This requires users to be co-located with the robot and have the physical ability to manipulate it. In this paper, we present a natural language based interface for PbD that removes these requirements and enables hands-free programming. We focus on programming object manipulation actions-our key insight is that such actions can be decomposed into known types of manipulator movements that are naturally described using spatial language; e.g., object reference expressions and prepositions. Our method takes a natural language command and the current world state to infer the intended movement command and its parametrization. We implement this method on a two-armed mobile manipulator and demonstrate the different types of manipulation actions that can be programmed with it. We compare it to a kinesthetic PbD interface and we demonstrate our method's ability to deal with incomplete language.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "8c23ad36-5a16-4876-ba41-ac1e0364b574",
+    "title": "Directions robot: in-the-wild experiences and lessons learned",
+    "abstract": "We introduce Directions Robot, a system we have fielded for studying open-world human-robot interaction. The system brings together models for situated spoken language interaction with directions-generation and a gesturing humanoid robot. We describe the perceptual, interaction, and output generation competencies of this system. We then discuss experiences and lessons drawn from data collected in an initial in-the-wild deployment, and highlight several challenges with managing engagement, providing directions, and handling out-of-domain queries that arise in open-world, multiparty settings.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "96cda2e6-42a9-4aba-b4af-3bef6cb25288",
+    "title": "Robots that Talk and Listen",
+    "abstract": "Robots That Talk and Listen provides a forward-looking examination of speech and language in robots from technical, functional, and social perspectives. Contributors address cultural foundations as well as the linguistic skills and technologies that robots need to function effectively in real-world settings. Among the most difficult and complex is the ability to understand and use language. Speech-enabled automata are already serving as interactive toys, teacher&#8217;s aides, and research assistants. These robots will soon be joined by personal companions, industrial co-workers, and military support automata. The social impact of these and other robots extends well beyond the specific tasks they perform. Contributors tackle the most knotty of those issues, notably acceptance of advanced, speech-enabled robots and developing ethical and moral controls for robots. Topics in this book include: &#8226;&nbsp;Language and Beyond: The True Meaning of &#8220;Speech Enabled&#8221; &#8226;&nbsp;Robots in Myth and Media &#8226;&nbsp;Enabling Robots to Converse&nbsp; &#8226;&nbsp;Language Learning by Automata &#8226;&nbsp;Handling Noisy Settings &#8226;&nbsp;Empirical Studies of Robots in Real-World Environments&nbsp; &#8226;&nbsp;Acceptance of Intelligent Robots &#8226;&nbsp;Managing Robots that Can Lie and Deceive &#8226;&nbsp;Envisioning a World Shared with Intelligent Robots",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "6b7ddc6f-3941-4487-9ff1-5ca4eff186d0",
+    "title": "Context Awareness and Human\u2013Robot Interaction Optimization for Museum Intelligent Guide Robot",
+    "abstract": "This study introduces a context\u2010aware human\u2013robot interaction framework designed for intelligent museum guide robots. The system adopts a three\u2010layer architecture\u2014perception, understanding, and behavior execution\u2014to facilitate adaptive and meaningful interactions in dynamic museum settings. The perception layer integrates RGB\u2010D cameras, microphone arrays, and laser rangefinders for comprehensive environmental sensing. An attention\u2010based model in the understanding layer identifies visitor interest points and infers interaction intent, achieving 87.4% accuracy in interest detection and 83.3% accuracy in overall context recognition. The behavior execution layer implements an \u201capproach\u2013explain\u2013retreat\u201d interaction paradigm responsive to engagement levels and prior interaction history. A field evaluation with 50 participants at the Hubei Provincial Museum demonstrated a 68% reduction in inappropriate interruptions, 42% improvement in information relevance, and 57% decrease in early interaction terminations. Visitor engagement time increased from 3.8 min for first\u2010time users to 7.3 min for return visitors, and information recall improved from 42% to 73% under the context\u2010aware model. Overall user satisfaction averaged 4.3/5, with 4.5/5 for educational value. These findings highlight the system's effectiveness in enhancing natural and informative robot\u2013human interaction in cultural spaces, contributing to the development of socially intelligent robotic systems.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "352bf0bf-cac3-4c8c-9eec-369d81b381db",
+    "title": "Learning to Follow Language Instructions with Adversarial Reward Induction",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "bea9f093-f59e-4c38-b030-33fb5fc3bf79",
+    "title": "Can Virtual Humans Be More Engaging Than Real Ones?",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "3504a4ca-729e-4d18-8bc5-63b8be974b1a",
+    "title": "Utilizing Prior Knowledge to Improve Automatic Speech Recognition in Human-Robot Interactive Scenarios",
+    "abstract": "The prolificacy of human-robot interaction not only depends on a robot's ability to understand the intent and content of the human utterance but also gets impacted by the automatic speech recognition (ASR) system. Modern ASR can provide highly accurate (grammatically and syntactically) translation. Yet, the general purpose ASR often misses out on the semantics of the translation by incorrect word prediction due to open-vocabulary modeling. ASR inaccuracy can have significant repercussions as this can lead to a completely different action by the robot in the real world. Can any prior knowledge be helpful in such a scenario? In this work, we explore how prior knowledge can be utilized in ASR decoding. Using our experiments, we demonstrate how our system can significantly improve ASR translation for robotic task instruction.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "8a247b80-e648-410d-9563-c1d245f9c4db",
+    "title": "Unsupervised Alignment of Natural Language Instructions with Video Segments",
+    "abstract": "We propose an unsupervised learning algorithm for automatically inferring the mappings between English nouns and corresponding video objects. Given a sequence of natural language instructions and an unaligned video recording, we simultaneously align each instruction to its corresponding video segment, and also align nouns in each instruction to their corresponding objects in video. While existing grounded language acquisition algorithms rely on pre-aligned supervised data (each sentence paired with corresponding image frame or video segment), our algorithm aims to automatically infer the alignment from the temporal structure of the video and parallel text instructions. We propose two generative models that are closely related to the HMM and IBM 1 word alignment models used in statistical machine translation. We evaluate our algorithm on videos of biological experiments performed in wetlabs, and demonstrate its capability of aligning video segments to text instructions and matching video objects to nouns in the absence of any direct supervision.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "387bc9c1-8fe1-4169-9c7f-5e8a9bc27f76",
+    "title": "Technology vs. workers: the case of Italy\u2019s Industry 4.0 factories",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "5aaed09d-ae53-4b28-9a80-97460619ab4c",
+    "title": "Recent trends in social aware robot navigation: A survey",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "b92232a6-9cdc-4eb4-8039-4d0f4575f493",
+    "title": "Adaptive Task Planner for Performing Home Service Tasks in Cooperation with a Human",
+    "abstract": "To perform a home service task through cooperation with a human in a real environment, a robot needs to deal with the environmental changes and accordingly plan appropriate behavior sequence. For this purpose, in this paper, we propose an adaptive task planner which is based on memory and reasoning. A robot perceives user behaviors and objects using an RGB-depth and thermal sensor. The robot stores a temporal sequence of behaviors for performing a task in its episodic memory that is realized by a sequence to sequence network. When the user command is given, the episodic memory is used to retrieve the behavior sequence to carry out the command. On the other hand, when the robot perceives user behaviors, the robot postpones its behavior till his/her behavior is stopped. Once stopped, the episodic memory retrieves the behavior sequence to conduct a task that the user has intended. A task scheduler schedules the behavior sequence from the memory and sends it to an internal simulator. The internal simulator confirms the behavior sequence to be executable and then if executable, it sends the next executable behavior to the execution module. If a behavior fails in the internal simulation test, fast forward planner generates an alternative behavior sequence to resolve the failed behavior problem. The effectiveness and applicability of the proposed planner is demonstrated by a wheel-based humanoid robot.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "05980378-d7c2-4967-894f-af64722f9710",
+    "title": "What To Do, And How To Do It",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "b71c796a-7fb6-408a-a68e-bab5413b7a8c",
+    "title": "SAC: Semantic Attention Composition for Text-Conditioned Image Retrieval",
+    "abstract": "The ability to efficiently search for images is essential for improving the user experiences across various products. Incorporating user feedback, via multi-modal inputs, to navigate visual search can help tailor retrieved results to specific user queries. We focus on the task of text-conditioned image retrieval that utilizes support text feedback alongside a reference image to retrieve images that concurrently satisfy constraints imposed by both inputs. The task is challenging since it requires learning composite image-text features by incorporating multiple cross-granular semantic edits from text feedback and then applying the same to visual features. To address this, we propose a novel framework SAC which resolves the above in two major steps: \"where to see\" (Semantic Feature Attention) and \"how to change\" (Semantic Feature Modification). We systematically show how our architecture streamlines the generation of text-aware image features by removing the need for various modules required by other state-of-art techniques. We present extensive quantitative, qualitative analysis, and ablation studies, to show that our architecture SAC outperforms existing techniques by achieving state-of-the-art performance on 3 benchmark datasets: FashionIQ, Shoes, and Birds-to-Words, while supporting natural language feedback of varying lengths.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "6edd3a7c-86eb-4a26-ab17-14c9bfcce0a4",
+    "title": "Research on Voice Interaction Robot System Based on the Hybrid Chat Model of Retrieval and Generation",
+    "abstract": "With the rapid development of artificial intelligence technology, the impact of intelligent interactive robots on human life is growing. This paper constructs an intelligent voice interaction robot system based on the cloud platform and Android platform. This system uses a microphone array for audio data collection, environmental noise reduction, and voice activation. The audio processing technology based on Voice Activity Detection (VAD) and time window is adopted, which transmits data to the voice recognition engine in real time and dynamically. By invoking iFlytek\u2019s open cloud platform\u2019s automatic speech recognition (ASR) and synthesis services, it completes the conversion of user speech to text and the conversion of robot reply text to speech (TTS); By combining the retrieval chat model based on text similarity method and the generative chat model based on Chinese pre-training model, a retrieval-generation hybrid chat model is proposed, realizing the text communication of the robot in specific fields and daily chat needs. This voice interaction robot system can respond to users in real time, cover a wide audience, and has broad application prospects.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "576e0453-2104-480a-8482-a700eddc2f8e",
+    "title": "A Review of Natural-Language-Instructed Robot Execution Systems",
+    "abstract": "It is natural and efficient to use human natural language (NL) directly to instruct robot task executions without prior user knowledge of instruction patterns. Currently, NL-instructed robot execution (NLexe) is employed in various robotic scenarios, including manufacturing, daily assistance, and health caregiving. It is imperative to summarize the current NLexe systems and discuss future development trends to provide valuable insights for upcoming NLexe research. This review categorizes NLexe systems into four types based on the robot\u2019s cognition level during task execution: NL-based execution control systems, NL-based execution training systems, NL-based interactive execution systems, and NL-based social execution systems. For each type of NLexe system, typical application scenarios with advantages, disadvantages, and open problems are introduced. Then, typical implementation methods and future research trends of NLexe systems are discussed to guide the future NLexe research.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "0af5738e-d140-42b6-82e0-dda6bebe7207",
+    "title": "Gated-Attention Architectures for Task-Oriented Language Grounding",
+    "abstract": "To perform tasks specified by natural language instructions, autonomous agents need to extract semantically meaningful representations of language and map it to visual elements and actions in the environment. This problem is called task-oriented language grounding. We propose an end-to-end trainable neural architecture for task-oriented language grounding in 3D environments which assumes no prior linguistic or perceptual knowledge and requires only raw pixels from the environment and the natural language instruction as input. The proposed model combines the image and text representations using a Gated-Attention mechanism and learns a policy to execute the natural language instruction using standard reinforcement and imitation learning methods. We show the effectiveness of the proposed model on unseen instructions as well as unseen maps, both quantitatively and qualitatively. We also introduce a novel environment based on a 3D game engine to simulate the challenges of task-oriented language grounding over a rich set of instructions and environment states.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "aeb72827-2054-4914-9e84-6d173a75d2ee",
+    "title": "Modeling Politeness in Human-Robot Interaction",
+    "abstract": "Politeness is a linguistic phenomenon central to human communication. The many influences on the choice and interpretation of politeness in language make the phenomenon very complex to model and to account for in Human-Robot Interaction. I therefore question whether and how the implementation of such a social linguistic phenomenon in a robot is desirable. To find answers I conducted studies on politeness in Human-Robot Interaction from different perspectives: users' expectations, users' politeness towards a robot and users' perception of politeness use by a robot. In future research, based on and informed by my results, I aim to computationally model two politeness strategies and implement them in a Furhat robot.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "2b289e1e-b102-461a-bae9-265e6f0f5bb9",
+    "title": "NLTK: The Natural Language Toolkit",
+    "abstract": "NLTK, the Natural Language Toolkit, is a suite of open source program modules, tutorials and problem sets, providing ready-to-use computational linguistics courseware. NLTK covers symbolic and statistical natural language processing, and is interfaced to annotated corpora. Students augment and replace existing components, learn structured programming by example, and manipulate sophisticated models from the outset.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "ed1d3ba9-c897-4b06-a016-069781be1525",
+    "title": "CrossMap Transformer: A Crossmodal Masked Path Transformer Using Double Back-Translation for Vision-and-Language Navigation",
+    "abstract": "Navigation guided by natural language instructions is particularly suitable for Domestic Service Robots that interacts naturally with users. This task involves the prediction of a sequence of actions that leads to a specified destination given a natural language navigation instruction. The task thus requires the understanding of instructions, such as \u201cWalk out of the bathroom and wait on the stairs that are on the right\u201d. The Visual and Language Navigation remains challenging, notably because it requires the exploration of the environment and at the accurate following of a path specified by the instructions to model the relationship between language and vision. To address this, we propose the CrossMap Transformer network, which encodes the linguistic and visual features to sequentially generate a path. The CrossMap transformer is tied to a Transformer-based speaker that generates navigation instructions. The two networks share common latent features, for mutual enhancement through a double back translation model: Generated paths are translated into instructions while generated instructions are translated into path. The experimental results show the benefits of our approach in terms of instruction understanding and instruction generation.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "456e385d-fbfe-454a-bab3-92411d319751",
+    "title": "Artificial Intelligence Risks and Algorithmic Regulation",
+    "abstract": "Abstract In this editorial article, we aim to map out the central features of algorithmic regulation and its conceptual basis \u2013 seeking to bring together different strands of the literature relating to the topic that have often remained apart. We then reflect on the ways through which algorithmic law could evolve to address the challenges of artificial intelligence in the legal domain, particularly by examining the potential of applying a \u201cprudential\u201d test in order to determine whether automated decision-making systems are suitable to adequately support legal decision-making.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "f67a35a6-64a7-4d3c-b289-366c583b258c",
+    "title": "Embodied agents for multi-party dialogue in immersive virtual worlds",
+    "abstract": "Immersive virtual worlds are increasingly being used for education, training, and entertainment, and virtual humans that can interact with human users in these worlds play many important roles. However, current computational models of dialogue do not address the issues that arise with face-to-face communication situated in three-dimensional worlds, such as the proximity and attentional focus of others, the ability to maintain multi-party conversations, and the interplay between speech and nonverbal signals. This paper presents a new model that integrates and extends prior work on spoken dialogue and embodied conversational agents, and describes an initial implementation that has been applied to training in virtual reality.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "20f30d40-2bf9-4b8c-8c55-22238b32c13a",
+    "title": "Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data",
+    "abstract": "We present Conditional Random Fields, a framework&#13;\\nfor building probabilistic models to segment&#13;\\nand label sequence data. Conditional random&#13;\\nfields offer several advantages over hidden&#13;\\nMarkov models and stochastic grammars&#13;\\nfor such tasks, including the ability to relax&#13;\\nstrong independence assumptions made in those&#13;\\nmodels. Conditional random fields also avoid&#13;\\na fundamental limitation of maximum entropy&#13;\\nMarkov models (MEMMs) and other discriminative&#13;\\nMarkov models based on directed graphical&#13;\\nmodels, which can be biased towards states&#13;\\nwith few successor states. We present iterative&#13;\\nparameter estimation algorithms for conditional&#13;\\nrandom fields and compare the performance of&#13;\\nthe resulting models to HMMs and MEMMs on&#13;\\nsynthetic and natural-language data.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "920c27e7-1bd8-4c02-a389-716a3f23bbef",
+    "title": "Duplex Conversation: Towards Human-like Interaction in Spoken Dialogue Systems",
+    "abstract": "In this paper, we present Duplex Conversation, a multi-turn, multimodal spoken dialogue system that enables telephone-based agents to interact with customers like a human. We use the concept of full-duplex in telecommunication to demonstrate what a human-like interactive experience should be and how to achieve smooth turn-taking through three subtasks: user state detection, backchannel selection, and barge-in detection. Besides, we propose semi-supervised learning with multimodal data augmentation to leverage unlabeled data to increase model generalization. Experimental results on three sub-tasks show that the proposed method achieves consistent improvements compared with baselines. We deploy the Duplex Conversation to Alibaba intelligent customer service and share lessons learned in production. Online A/B experiments show that the proposed system can significantly reduce response latency by 50%.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "aecd89e8-2fdc-4ef4-a1f5-1b16974867c1",
+    "title": "Manipulation action tree bank: A knowledge resource for humanoids",
+    "abstract": "Our premise is that actions of manipulation are represented at multiple levels of abstraction. At the high level a grammatical structure represents symbolic information (objects, actions, tools, body parts) and their interaction in a temporal sequence, and at lower levels the symbolic quantities are grounded in perception. In this paper we create symbolic high-level representations in the form of manipulation action tree banks, which are parsed from annotated action corpora. A context free grammar provides the grammatical description for the creation of the semantic trees. Experiments conducted on the tree banks show that they allow to 1) generate so-called visual semantic graphs (VSGs), 2) compare the semantic distance between steps of activities and 3) discover the underlying semantic space of an activity. We believe that tree banks are an effective and practical way to organize semantic structures of manipulation actions for humanoids applications. They could be used as basis for 1) automatic manipulation action understanding and execution and 2) reasoning and prediction during both observation and execution. The knowledge resource follows the widely used Penn Tree Bank format.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "c96ecd85-fece-40b1-8755-3d0b14a1ca94",
+    "title": "Language to Map: Topological map generation from natural language path instructions",
+    "abstract": "In this paper, a method for generating a map from path information described using natural language (textual path) is proposed. In recent years, robotics research mainly focus on vision-and-language navigation (VLN), a navigation task based on images and textual paths. Although VLN is expected to facilitate user instructions to robots, its current implementation requires users to explain the details of the path for each navigation session, which results in high explanation costs for users. To solve this problem, we proposed a method that creates a map as a topological map from a textual path and automatically creates a new path using this map. We believe that large language models (LLMs) can be used to understand textual path. Therefore, we propose and evaluate two methods, one for storing implicit maps in LLMs, and the other for generating explicit maps using LLMs. The implicit map is in the LLM\u2019s memory. It is created using prompts. In the explicit map, a topological map composed of nodes and edges is constructed and the actions at each node are stored. This makes it possible to estimate the path and actions at waypoints on an undescribed path, if enough information is available. Experimental results on path instructions generated in a real environment demonstrate that generating explicit maps achieves significantly higher accuracy than storing implicit maps in the LLMs.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "e7a1b4d9-6fac-4223-96e7-00ccbeae8164",
+    "title": "Inferring Rewards from Language in Context",
+    "abstract": "In classic instruction following, language like \"I'd like the JetBlue flight\" maps to actions (e.g., selecting that flight). However, language also conveys information about a user's underlying reward function (e.g., a general preference for JetBlue), which can allow a model to carry out desirable actions in new contexts. We present a model that infers rewards from language pragmatically: reasoning about how speakers choose utterances not only to elicit desired actions, but also to reveal information about their preferences. On a new interactive flight-booking task with natural language, our model more accurately infers rewards and predicts optimal actions in unseen environments, in comparison to past work that first maps language to actions (instruction following) and then maps actions to rewards (inverse reinforcement learning).",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "260ba8f4-8f5c-420c-8772-5030c71cb157",
+    "title": "Feedback-Guided Autonomous Driving",
+    "abstract": "While behavior cloning has recently emerged as a highly successful paradigm for autonomous driving, humans rarely learn to perform complex tasks, such as driving, via imitation or behavior cloning alone. In contrast, learning in humans often involves additional detailed guidance throughout the interactive learning process, i.e., where feedback, often via language, provides detailed information as to which part of their trial was performed incorrectly or suboptimally and why. Motivated by this observation, we introduce an efficient feedback-based framework for improving behavior-cloning-based training of sensorimotor driving agents. Our key insight is to leverage recent advances in Large Language Models (LLMs) to provide corrective fine-grained feedback regarding the underlying reason behind driving prediction failures. Moreover, our introduced network architecture is efficient, enabling the first sensorimotor end-to-end training and evaluation of LLM-based driving models. The resulting agent achieves state-of-the-art performance in open-loop evaluation on nuScenes, outperforming prior state-of-the-art by over 8.1% and 57.1% in accuracy and collision rate, respectively. In CARLA, our camera-based agent improves by 16.6% in driving score over prior LIDAR-based approaches.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "96b408a9-9475-4ddd-9001-a8faf5f4a086",
+    "title": "Towards grounding concepts for transfer in goal learning from demonstration",
+    "abstract": "We aim to build robots that frame the task learning problem as goal inference so that they are natural to teach and meet people's expectations for a learning partner. The focus of this work is the scenario of a social robot that learns task goals from human demonstrations without prior knowledge of high-level concepts. In the system that we present, these discrete concepts are grounded from low-level continuous sensor data through unsupervised learning, and task goals are subsequently learned on them using Bayesian inference. The grounded concepts are derived from the structure of the Learning from Demonstration (LfD) problem and exhibit degrees of prototypicality. These concepts can be used to transfer knowledge to future tasks, resulting in faster learning of those tasks. Using sensor data taken during demonstrations to our robot from five human teachers, we show the expressivity of using grounded concepts when learning new tasks from demonstration. We then show how the learning curve improves when transferring the knowledge of grounded concepts to future tasks.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "18cecd7f-4089-4ba1-970e-d9d5c08ac3c8",
+    "title": "An integrated robotic system for spatial understanding and situated interaction in indoor environments",
+    "abstract": "A major challenge in robotics and artificial intelligence lies in creating robots that are to cooperate with people in human-populated environments, e.g. for domestic assistance or elderly care. Such robots need skills that allow them to interact with the world and the humans living and working therein. In this paper we investigate the question of spatial understanding of human-made environments. The functionalities of our system comprise perception of the world, natural language, learning, and reasoning. For this purpose we integrate state-of-the-art components from different disciplines in AI, robotics and cognitive systems into a mobile robot system. The work focuses on the description of the principles we used for the integration, including cross-modal integration, ontology-based mediation, and multiple levels of abstraction of perception. Finally, we present experiments with the integrated \"CoSy Explorer\" system and list some of the major lessons that were learned from its design, implementation, and evaluation.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "ab39d7ea-c35c-4301-b3dd-0408241d9c8e",
+    "title": "ManiGaussian: Dynamic Gaussian Splatting for\u00a0Multi-task Robotic Manipulation",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "4336083c-a3f3-486d-992c-fb58708a3eb4",
+    "title": "I Can\u2019t Help Myself! \"Asking for Help\" through an Elicitation Study in the Wild",
+    "abstract": "In this work, we examine robots \"asking for help\" in unpredictable human spaces. We focus on an open question particularly relevant for robots deployed in public\u2013\"how do people help robots?\" We present an elicitation study that shows how asking for help in a real-world field study yields valuable and sometimes unexpected information. From our study, we examine strangers\u2019 responses toward a robot asking for spatial directions and extract valuable themes that can inform future asking-for-help systems. Our analysis provides a wide range of information, from geometric and topological information in natural language to details about rejection during an interaction. Further, we also provide anecdotes of valuable outlier behavior that can only be captured through a study in a real public space. Through our work, we highlight the importance of in-the-wild studies and discuss how the rich information they contribute will help robots effectively ask for help.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "35562ad4-aac1-400e-ac37-e802488441f3",
+    "title": "Grounding spatial relations for outdoor robot navigation",
+    "abstract": "We propose a language-driven navigation approach for commanding mobile robots in outdoor environments. We consider unknown environments that contain previously unseen objects. The proposed approach aims at making interactions in human-robot teams natural. Robots receive from human teammates commands in natural language, such as \u201cNavigate around the building to the car left of the fire hydrant and near the tree\u201d. A robot needs first to classify its surrounding objects into categories, using images obtained from its sensors. The result of this classification is a map of the environment, where each object is given a list of semantic labels, such as \u201ctree\u201d and \u201ccar\u201d, with varying degrees of confidence. Then, the robot needs to ground the nouns in the command. Grounding, the main focus of this paper, is mapping each noun in the command into a physical object in the environment. We use a probabilistic model for interpreting the spatial relations, such as \u201cleft of\u201d and \u201cnear\u201d. The model is learned from examples provided by humans. For each noun in the command, a distribution on the objects in the environment is computed by combining spatial constraints with a prior given as the semantic classifier's confidence values. The robot needs also to ground the navigation mode specified in the command, such as \u201cnavigate quickly\u201d and \u201cnavigate covertly\u201d, as a cost map. The cost map is also learned from examples, using Inverse Optimal Control (IOC). The cost map and the grounded goal are used to generate a path for the robot. This approach is evaluated on a robot in a real-world environment. Our experiments clearly show that the proposed approach is efficient for commanding outdoor robots.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "1350ded1-3982-413d-969f-c576a2fc886b",
+    "title": "Multimodal estimation and communication of latent semantic knowledge for robust execution of robot instructions",
+    "abstract": "The goal of this article is to enable robots to perform robust task execution following human instructions in partially observable environments. A robot\u2019s ability to interpret and execute commands is fundamentally tied to its semantic world knowledge. Commonly, robots use exteroceptive sensors, such as cameras or LiDAR, to detect entities in the workspace and infer their visual properties and spatial relationships. However, semantic world properties are often visually imperceptible. We posit the use of non-exteroceptive modalities including physical proprioception, factual descriptions, and domain knowledge as mechanisms for inferring semantic properties of objects. We introduce a probabilistic model that fuses linguistic knowledge with visual and haptic observations into a cumulative belief over latent world attributes to infer the meaning of instructions and execute the instructed tasks in a manner robust to erroneous, noisy, or contradictory evidence. In addition, we provide a method that allows the robot to communicate knowledge dissonance back to the human as a means of correcting errors in the operator\u2019s world model. Finally, we propose an efficient framework that anticipates possible linguistic interactions and infers the associated groundings for the current world state, thereby bootstrapping both language understanding and generation. We present experiments on manipulators for tasks that require inference over partially observed semantic properties, and evaluate our framework\u2019s ability to exploit expressed information and knowledge bases to facilitate convergence, and generate statements to correct declared facts that were observed to be inconsistent with the robot\u2019s estimate of object properties.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "66a5c2cd-4fcc-45b9-96e5-7a78b23eb30d",
+    "title": "\u201cWhat\u201d and \u201cwhere\u201d in spatial language and spatial cognition",
+    "abstract": "Abstract Fundamental to spatial knowledge in all species are the representations underlying object recognition, object search, and navigation through space. But what sets humans apart from other species is our ability to express spatial experience through language. This target article explores the language of objects and places , asking what geometric properties are preserved in the representations underlying object nouns and spatial prepositions in English. Evidence from these two aspects of language suggests there are significant differences in the geometric richness with which objects and places are encoded. When an object is named (i.e., with count nouns), detailed geometric properties \u2013 principally the object's shape (axes, solid and hollow volumes, surfaces, and parts) \u2013 are represented. In contrast, when an object plays the role of either \u201cfigure\u201d (located object) or \u201cground\u201d (reference object) in a locational expression, only very coarse geometric object properties are represented, primarily the main axes. In addition, the spatial functions encoded by spatial prepositions tend to be nonmetric and relatively coarse, for example, \u201ccontainment,\u201d \u201ccontact,\u201d \u201crelative distance,\u201d and \u201crelative direction.\u201d These properties are representative of other languages as well. The striking differences in the way language encodes objects versus places lead us to suggest two explanations: First, there is a tendency for languages to level out geometric detail from both object and place representations. Second, a nonlinguistic disparity between the representations of \u201cwhat\u201d and \u201cwhere\u201d underlies how language represents objects and places. The language of objects and places converges with and enriches our understanding of corresponding spatial representations.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "b4e48841-ccf1-413e-89b1-0ac6dad8a85c",
+    "title": "Leave It to Large Language Models! Correction and Planning with Memory Integration",
+    "abstract": "As humans, we can naturally break down a task into individual steps in our daily lives and we are able to provide feedback or dynamically adjust the plan when encountering obstacles. Similarly, our aim is to facilitate agents in comprehending and carrying out natural language instructions in a more efficient and cost-effective manner. For example, in Vision-Language Navigation (VLN) tasks, the agent needs to understand instructions such as \"go to the table by the fridge\". This understanding allows the agent to navigate to the table and infer that the destination is likely to be in the kitchen. The traditional VLN approach mainly involves training models using a large number of labeled datasets for task planning in unseen environments. However, manual labeling incurs a high cost for this approach. Considering that large language models (LLMs) already possess extensive commonsense knowledge during pre-training, some researchers have started using LLMs as decision modules in embodied tasks, although this approach shows the LLMs' reasoning ability to plan a logical sequence of subtasks based on global information. However, executing subtasks often encounters issues, such as obstacles that hinder progress and alterations in the state of the target object. Even one mistake can cause the subsequent tasks to fail, which makes it challenging to complete the instructions through a single plan. Therefore, we propose a new approach-C (Correction) and P (Planning) with M (Memory) I (Integration)-that centered on an LLM for embodied tasks. In more detail, the auxiliary modules of the CPMI facilitate dynamic planning by the LLM-centric planner. These modules provide the agent with memory and generalized experience mechanisms to fully utilize the LLM capabilities, allowing it to improve its performance during execution. Finally, the experimental results on public datasets demonstrate that we achieve the best performance in the few-shot scenario, improving the efficiency of the successive task while increasing the success rate.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "e6a8345e-7aff-4ac6-81dc-d0d0b9dd28c1",
+    "title": "Physical Causality of Action Verbs in Grounded Language Understanding",
+    "abstract": "Linguistics studies have shown that action verbs often denote some Change of State (CoS) as the result of an action. However, the causality of action verbs and its potential connection with the physical world has not been systematically explored. To address this limitation, this paper presents a study on physical causality of action verbs and their implied changes in the physical world. We first conducted a crowdsourcing experiment and identified eighteen categories of physical causality for action verbs. For a subset of these categories, we then defined a set of detectors that detect the corresponding change from visual perception of the physical environment. We further incorporated physical causality modeling and state detection in grounded language understanding. Our empirical studies have demonstrated the effectiveness of causality modeling in grounding language to perception.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "b43e2ff4-b571-478f-a130-040c51f76f12",
+    "title": "Empowering Large Language Models: Tool Learning for Real-World Interaction",
+    "abstract": "Since the advent of large language models (LLMs), the field of tool learning has remained very active in solving various tasks in practice, including but not limited to information retrieval. This half-day tutorial provides basic concepts of this field and an overview of recent advancements with several applications. In specific, we start with some foundational components and architecture of tool learning (i.e., cognitive tool and physical tool), and then we categorize existing studies in this field into tool-augmented learning and tool-oriented learning, and introduce various learning methods to empower LLMs this kind of capability. Furthermore, we provide several cases about when, what, and how to use tools in different applications. We end with some open challenges and several potential research directions for future studies. We believe this tutorial is suited for both researchers at different stages (introductory, intermediate, and advanced) and industry practitioners who are interested in LLMs and tool learning.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "c2372670-06be-4666-947d-828a210c8751",
+    "title": "Evaluating Large Language Models Trained on Code",
+    "abstract": "We introduce Codex, a GPT language model fine-tuned on publicly available code from GitHub, and study its Python code-writing capabilities. A distinct production version of Codex powers GitHub Copilot. On HumanEval, a new evaluation set we release to measure functional correctness for synthesizing programs from docstrings, our model solves 28.8% of the problems, while GPT-3 solves 0% and GPT-J solves 11.4%. Furthermore, we find that repeated sampling from the model is a surprisingly effective strategy for producing working solutions to difficult prompts. Using this method, we solve 70.2% of our problems with 100 samples per problem. Careful investigation of our model reveals its limitations, including difficulty with docstrings describing long chains of operations and with binding operations to variables. Finally, we discuss the potential broader impacts of deploying powerful code generation technologies, covering safety, security, and economics.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "676f196c-2820-499d-ae55-e60893e9737d",
+    "title": "A Situationally Aware Voice\u2010commandable Robotic Forklift Working Alongside People in Unstructured Outdoor Environments",
+    "abstract": "One long\u2010standing challenge in robotics is the realization of mobile autonomous robots able to operate safely in human workplaces, and be accepted by the human occupants. We describe the development of a multiton robotic forklift intended to operate alongside people and vehicles, handling palletized materials within existing, active outdoor storage facilities. The system has four novel characteristics. The first is a multimodal interface that allows users to efficiently convey task\u2010level commands to the robot using a combination of pen\u2010based gestures and natural language speech. These tasks include the manipulation, transport, and placement of palletized cargo within dynamic, human\u2010occupied warehouses. The second is the robot's ability to learn the visual identity of an object from a single user\u2010provided example and use the learned model to reliably and persistently detect objects despite significant spatial and temporal excursions. The third is a reliance on local sensing that allows the robot to handle variable palletized cargo and navigate within dynamic, minimally prepared environments without a global positioning system. The fourth concerns the robot's operation in close proximity to people, including its human supervisor, pedestrians who may cross or block its path, moving vehicles, and forklift operators who may climb inside the robot and operate it manually. This is made possible by interaction mechanisms that facilitate safe, effective operation around people. This paper provides a comprehensive description of the system's architecture and implementation, indicating how real\u2010world operational requirements motivated key design choices. We offer qualitative and quantitative analyses of the robot operating in real settings and discuss the lessons learned from our effort.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "fe7501bf-ef41-4291-ab95-f1671b358add",
+    "title": "6G and Embodied AI: Benefits and Risks of Increasingly Extended Minds",
+    "abstract": null,
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "812336bf-8021-4ff3-9e0e-9eb57a8e8600",
+    "title": "A multimodal approach to support teacher, researcher and <scp>AI</scp> collaboration in <scp>STEM</scp> +C learning environments",
+    "abstract": "Abstract Recent advances in generative artificial intelligence (AI) and multimodal learning analytics (MMLA) have allowed for new and creative ways of leveraging AI to support K12 students' collaborative learning in STEM+C domains. To date, there is little evidence of AI methods supporting students' collaboration in complex, open\u2010ended environments. AI systems are known to underperform humans in (1) interpreting students' emotions in learning contexts, (2) grasping the nuances of social interactions and (3) understanding domain\u2010specific information that was not well\u2010represented in the training data. As such, combined human and AI (ie, hybrid) approaches are needed to overcome the current limitations of AI systems. In this paper, we take a first step towards investigating how a human\u2010AI collaboration between teachers and researchers using an AI\u2010generated multimodal timeline can guide and support teachers' feedback while addressing students' STEM+C difficulties as they work collaboratively to build computational models and solve problems. In doing so, we present a framework characterizing the human component of our human\u2010AI partnership as a collaboration between teachers and researchers. To evaluate our approach, we present our timeline to a high school teacher and discuss the key insights gleaned from our discussions. Our case study analysis reveals the effectiveness of an iterative approach to using human\u2010AI collaboration to address students' STEM+C challenges: the teacher can use the AI\u2010generated timeline to guide formative feedback for students, and the researchers can leverage the teacher's feedback to help improve the multimodal timeline. Additionally, we characterize our findings with respect to two events of interest to the teacher: (1) when the students cross a difficulty threshold, and (2) the point of intervention , that is, when the teacher (or system) should intervene to provide effective feedback. It is important to note that the teacher explained that there should be a lag between (1) and (2) to give students a chance to resolve their own difficulties. Typically, such a lag is not implemented in computer\u2010based learning environments that provide feedback. Practitioner notes What is already known about this topic Collaborative, open\u2010ended learning environments enhance students' STEM+C conceptual understanding and practice, but they introduce additional complexities when students learn concepts spanning multiple domains. Recent advances in generative AI and MMLA allow for integrating multiple datastreams to derive holistic views of students' states, which can support more informed feedback mechanisms to address students' difficulties in complex STEM+C environments. Hybrid human\u2010AI approaches can help address collaborating students' STEM+C difficulties by combining the domain knowledge, emotional intelligence and social awareness of human experts with the general knowledge and efficiency of AI. What this paper adds We extend a previous human\u2010AI collaboration framework using a hybrid intelligence approach to characterize the human component of the partnership as a researcher\u2010teacher partnership and present our approach as a teacher\u2010researcher\u2010AI collaboration. We adapt an AI\u2010generated multimodal timeline to actualize our human\u2010AI collaboration by pairing the timeline with videos of students encountering difficulties, engaging in active discussions with a high school teacher while watching the videos to discern the timeline's utility in the classroom. From our discussions with the teacher, we define two types of inflection points to address students' STEM+C difficulties\u2014the difficulty threshold and the intervention point \u2014and discuss how the feedback latency interval separating them can inform educator interventions. We discuss two ways in which our teacher\u2010researcher\u2010AI collaboration can help teachers support students encountering STEM+C difficulties: (1) teachers using the multimodal timeline to guide feedback for students, and (2) researchers using teachers' input to iteratively refine the multimodal timeline. Implications for practice and/or policy Our case study suggests that timeline gaps (ie, disengaged behaviour identified by off\u2010screen students, pauses in discourse and lulls in environment actions) are particularly important for identifying inflection points and formulating formative feedback. Human\u2010AI collaboration exists on a dynamic spectrum and requires varying degrees of human control and AI automation depending on the context of the learning task and students' work in the environment. Our analysis of this human\u2010AI collaboration using a multimodal timeline can be extended in the future to support students and teachers in additional ways, for example, designing pedagogical agents that interact directly with students, developing intervention and reflection tools for teachers, helping teachers craft daily lesson plans and aiding teachers and administrators in designing curricula.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "e34f3d07-ba0a-40f4-8699-e12ce2b294f2",
+    "title": "Overtrust in the robotic age",
+    "abstract": "A contemporary ethical challenge.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "2e63b656-7cc5-4a2e-bfd2-6e97fbd7b5a7",
+    "title": "Consequential sound induces illusory distortions in the perception and prediction of robot motion",
+    "abstract": "For efficient human-robot interaction, human operators need to be able to efficiently represent the robot\u2019s movements in space and predict its next steps. However, according to frameworks of Bayesian multisensory integration, features outside the motion itself \u2013 like the consequential sounds a robot makes while it moves \u2013 should affect how otherwise identical motions are perceived. Here, we translate an established psychophysical task from experimental psychology to a human-robot interaction context, and can measure these distortions to motion perception. In two series of preregistered studies, participants watched a humanoid robot make (forward and backward) reaching movements. When the robot hand suddenly disappeared, they reported its last seen location, either with the mouse cursor (Experiment 1a and 1b) or by matching it to probe stimuli in different locations (Experiment 2a and 2b). The results revealed that even small changes to the robot\u2019s consequential sound robustly affect participants\u2019 visuospatial representation of its motions, so that the motion appeared to extend further in space when accompanied by slightly (100 ms) longer sounds compared to slightly shorter sounds (100 ms shorter). Moreover, these sound changes do not only affect where people currently locate the robot\u2019s motion, but where they anticipate its future steps. These findings show that sound design is an effective medium for manipulating how people represent otherwise identical robot actions and coordinate its interactions with it. The study acts as proof of concept that psychophysical tasks provide a promising tool to measure how design parameters influence the perception and prediction of robot motion.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "5cf3e843-062d-4411-b9c1-b5797b326af0",
+    "title": "A Gentle Introduction to Reinforcement Learning and its Application in Different Fields",
+    "abstract": "Due to the recent progress in Deep Neural Networks, Reinforcement Learning (RL) has become one of the most important and useful technology. It is a learning method where a software agent interacts with an unknown environment, selects actions, and progressively discovers the environment dynamics. RL has been effectively applied in many important areas of real life. This article intends to provide an in-depth introduction of the Markov Decision Process, RL and its algorithms. Moreover, we present a literature review of the application of RL to a variety of fields, including robotics and autonomous control, communication and networking, natural language processing, games and self-organized system, scheduling management and configuration of resources, and computer vision.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "30becb77-7914-4b69-8a8e-cc3e7ac862e7",
+    "title": "Unsupervised PCFG Induction for Grounded Language Learning with Highly Ambiguous Supervision",
+    "abstract": "\u201cGrounded \u201d language learning employs training data in the form of sentences paired with relevant but ambiguous perceptual contexts. B\u00f6rschinger et al. (2011) introduced an approach to grounded language learning based on unsupervised PCFG induction. Their approach works well when each sentence potentially refers to one of a small set of possible meanings, such as in the sportscasting task. However, it does not scale to problems with a large set of potential meanings for each sentence, such as the navigation instruction following task studied by Chen and Mooney (2011). This paper presents an enhancement of the PCFG approach that scales to such problems with highly-ambiguous supervision. Experimental results on the navigation task demonstrates the effectiveness of our approach. 1",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "09f35c32-8cac-4440-9e7f-d443ebea6e2a",
+    "title": "On depicting social agents",
+    "abstract": "We take up issues raised in the commentaries about our proposal that social robots are depictions of social agents. Among these issues are the realism of social agents, experiencing robots, communicating with robots, anthropomorphism, and attributing traits to robots. We end with comments about the future of social robots.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "f22786e7-cf4d-467a-937d-872d248beeb3",
+    "title": "Social behavior recognition using body posture and head pose for human-robot interaction",
+    "abstract": "Robots that interact with humans in everyday situations, need to be able to interpret the nonverbal social cues of their human interaction partners. We show that humans use body posture and head pose as social signals to initiate and terminate interaction when ordering drinks at a bar. For that, we record and analyze 108 interactions of humans interacting with a human bartender. Based on these findings, we train a Hidden Markov Model (HMM) using automatic body posture and head pose estimation. With this model, the bartender robot of the project JAMES can recognize typical social behaviors of human customers. Evaluation shows a recognition rate of 82.9 % for all implemented social behaviors and in particular a recognition rate of 91.2 % for bartender attention requests, which will allow the robot to interact with multiple humans in a robust and socially appropriate way.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "bcc6fa2c-1cb8-427c-b237-777e032ccf01",
+    "title": "Towards algorithm auditing: managing legal, ethical and technological risks of AI, ML and associated algorithms",
+    "abstract": "-Business reliance on algorithms is becoming ubiquitous, and companies are increasingly concerned about their algorithms causing major financial or reputational damage. High-profile cases include Google's AI algorithm for photo classification mistakenly labelling a black couple as gorillas in 2015 (Gebru 2020 In <i>The Oxford handbook of ethics of AI</i>, pp. 251-269), Microsoft's AI chatbot Tay that spread racist, sexist and antisemitic speech on Twitter (now X) (Wolf <i>et al</i>. 2017 <i>ACM Sigcas Comput. Soc</i>. <b>47</b>, 54-64 (doi:10.1145/3144592.3144598)), and Amazon's AI recruiting tool being scrapped after showing bias against women. In response, governments are legislating and imposing bans, regulators fining companies and the judiciary discussing potentially making algorithms artificial 'persons' in law. As with financial audits, governments, business and society will require algorithm audits; formal assurance that algorithms are legal, ethical and safe. A new industry is envisaged: Auditing and Assurance of Algorithms (cf. data privacy), with the remit to professionalize and industrialize AI, ML and associated algorithms. The stakeholders range from those working on policy/regulation to industry practitioners and developers. We also anticipate the nature and scope of the auditing levels and framework presented will inform those interested in systems of governance and compliance with regulation/standards. Our goal in this article is to survey the key areas necessary to perform auditing and assurance and instigate the debate in this novel area of research and practice.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "c6121b95-ecfc-4228-890b-4752448116f9",
+    "title": "Will multimodal large language models ever achieve deep understanding of the world?",
+    "abstract": "Despite impressive performance in various tasks, large language models (LLMs) are subject to the symbol grounding problem, so from the cognitive science perspective, one can argue that they are merely statistics-driven distributional models without a deeper understanding. Modern multimodal versions of LLMs (MLLMs) are trying to avoid this problem by linking language knowledge with other modalities such as vision (Vision Language Models called VLM) or action (Vision Language Action Models called VLA) when, for instance, a robotic agent, is acting in the world. If eventually successful, MLLMs could be taken as pathway for symbol grounding. In this work, we explore the extent to which MLLMs integrated with embodied agents can achieve such grounded understanding through interaction with the physical world. We argue that closing the gap between symbolic tokens, neural representations, and embodied experience will require deeper developmental integration of continuous sensory data, goal-directed behavior, and adaptive neural learning in real-world environments. We raise a concern that MLLMs do not currently achieve a human-like level of deep understanding, largely because their random learning trajectory deviates significantly from human cognitive development. Humans typically acquire knowledge incrementally, building complex concepts upon simpler ones in a structured developmental progression. In contrast, MLLMs are often trained on vast, randomly ordered datasets. This non-developmental approach, which circumvents a structured simple-to-complex conceptual scaffolding, inhibits the ability to build a deep and meaningful grounded knowledge base, posing a significant challenge to achieving human-like semantic comprehension.",
+    "gt_decision": "exclude",
+    "stratum": "excluded"
+  },
+  {
+    "paper_id": "47cbb5c7-1f2e-40b7-be94-9d8b6f94eb36",
+    "title": "Language, Camera, Autonomy! Prompt-engineered Robot Control for Rapidly Evolving Deployment",
+    "abstract": "The Context-observant LLM-Enabled Autonomous Robots (CLEAR) platform offers a general solution for large language model (LLM)-enabled robot autonomy. CLEAR-controlled robots use natural language to perceive and interact with their environment: contextual description deriving from computer vision and optional human commands prompt intelligent LLM responses that map to robotic actions. By emphasizing prompting, system behavior is programmed without manipulating code, and unlike other LLM-based robot control methods, we do not perform any model fine-tuning. CLEAR employs off-the-shelf pre-trained machine learning models for controlling robots ranging from simulated quadcopters to terrestrial quadrupeds. We provide the open-source CLEAR platform, along with sample implementations for a Unity-based quadcopter and Boston Dynamics Spot\u00ae robot. Each LLM used, GPT-3.5, GPT-4, and LLaMA2, exhibited behavioral differences when embodied by CLEAR, contrasting in actuation preference, ability to apply new knowledge, and receptivity to human instruction. GPT-4 demonstrates best performance compared to GPT-3.5 and LLaMA2, showing successful task execution 97% of the time. The CLEAR platform contributes to HRI by increasing the usability of robotics for natural human interaction.",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "9ffd9c42-5347-4f30-bf3c-afb6935989dd",
+    "title": "Learning to interpret natural language commands through human-robot dialog",
+    "abstract": "Intelligent robots frequently need to understand re-quests from naive users through natural language. Previous approaches either cannot account for lan-guage variation, e.g., keyword search, or require gathering large annotated corpora, which can be ex-pensive and cannot adapt to new variation. We in-troduce a dialog agent for mobile robots that under-stands human instructions through semantic pars-ing, actively resolves ambiguities using a dialog manager, and incrementally learns from human-robot conversations by inducing training data from user paraphrases. Our dialog agent is implemented and tested both on a web interface with hundreds of users via Mechanical Turk and on a mobile robot over several days, tasked with understanding nav-igation and delivery requests through natural lan-guage in an office environment. In both contexts, We observe significant improvements in user satis-faction after learning from conversations. 1",
+    "gt_decision": "include",
+    "stratum": "included"
+  },
+  {
+    "paper_id": "618fe7c9-88d5-48ce-890f-8330ded332a2",
+    "title": "Bridging the Gap: Using Deep Acoustic Representations to Learn Grounded Language from Percepts and Raw Speech",
+    "abstract": "Learning to understand grounded language, which connects natural language to percepts, is a critical research area. Prior work in grounded language acquisition has focused primarily on textual inputs. In this work, we demonstrate the feasibility of performing grounded language acquisition on paired visual percepts and raw speech inputs. This will allow human-robot interactions in which language about novel tasks and environments is learned from end-users, reducing dependence on textual inputs and potentially mitigating the effects of demographic bias found in widely available speech recognition systems. We leverage recent work in self-supervised speech representation models and show that learned representations of speech can make language grounding systems more inclusive towards specific groups while maintaining or even increasing general performance.",
+    "gt_decision": "include",
+    "stratum": "included"
+  }
+]
