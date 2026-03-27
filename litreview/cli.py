@@ -189,12 +189,15 @@ def screen(
     include_uncertain: bool = typer.Option(False, "--include-uncertain", help="Clear UNCERTAIN prefix from pending papers so they get a clean re-screen."),
     non_interactive: bool = typer.Option(False, "--non-interactive", help="Never prompt on backend failure — auto-switch or raise immediately."),
     yes: bool = typer.Option(False, "--yes", "-y", help="Skip large-batch confirmation prompt (>200 papers)."),
+    qa: bool = typer.Option(False, "--qa", help="Run QA check after screening: sample papers and re-check with Claude Haiku (Anthropic). Stops and prints disagreements if agreement < --qa-threshold."),
+    qa_sample: int = typer.Option(75, "--qa-sample", help="Number of papers to sample for QA (stratified 30% include / 70% exclude)."),
+    qa_threshold: float = typer.Option(0.90, "--qa-threshold", help="Minimum agreement rate to pass QA (default 0.90). Below this, screening is flagged for criteria review."),
 ) -> None:
     """Screen pending papers against inclusion criteria using an LLM backend."""
     import sys as _sys
     import tomllib
     from litreview.db import get_client, get_or_create_project, next_round_number
-    from litreview.screen import screen_project
+    from litreview.screen import screen_project, qa_screen
 
     _valid_backends = {"groq", "gemini", "openrouter", "anthropic"}
     if not all(b.strip() in _valid_backends for b in backend.split(",")):
@@ -244,6 +247,15 @@ def screen(
     if screened:
         console.print(f"\nYield rate: {counts['include'] / screened:.1%}")
 
+    if qa and not dry_run and screened > 0:
+        qa_result = qa_screen(
+            client, project_id, round_number,
+            sample_size=qa_sample,
+            threshold=qa_threshold,
+        )
+        if qa_result["passed"] is False:
+            raise typer.Exit(2)  # distinct exit code so scripts can detect QA failure
+
 
 # ── recommend ─────────────────────────────────────────────────────────────────
 
@@ -263,7 +275,7 @@ def recommend(
     """
     import tomllib
     from litreview.db import get_client, get_or_create_project, get_papers, get_frontier_depth
-    from litreview.recommend import fetch_s2_recommendations
+    from litreview.recommend import fetch_s2_recommendations, enrich_s2_ids
 
     if config:
         with open(config, "rb") as f:
@@ -289,6 +301,14 @@ def recommend(
         reverse=True,
     )
     negatives = [p for p in all_papers if p.get("inclusion_status") == "excluded"]
+
+    # Enrich missing S2 IDs from DOIs (traversal papers come from OpenAlex and often lack S2 IDs)
+    n_missing = sum(1 for p in positives + negatives if not p.get("s2_id") and p.get("doi"))
+    if n_missing:
+        console.print(f"  Resolving S2 IDs for {n_missing} papers with DOIs but no S2 ID…")
+        n_resolved = enrich_s2_ids(client, positives + negatives)
+        if n_resolved:
+            console.print(f"  [green]Resolved {n_resolved} new S2 IDs.[/green]")
 
     pos_ids = [p["s2_id"] for p in positives if p.get("s2_id")]
     neg_ids = [p["s2_id"] for p in negatives if p.get("s2_id")]
@@ -422,7 +442,7 @@ def iterate(
 
         # Step 2 (optional): S2 recommendations
         if use_recommend:
-            from litreview.recommend import fetch_s2_recommendations
+            from litreview.recommend import fetch_s2_recommendations, enrich_s2_ids
             from litreview.db import upsert_paper as _upsert_paper
             _all = get_papers(client, project_id)
             _pos = sorted(
@@ -430,6 +450,11 @@ def iterate(
                 key=lambda p: p.get("depth", 0), reverse=True,
             )
             _neg = [p for p in _all if p.get("inclusion_status") == "excluded"]
+            _n_missing = sum(1 for p in _pos + _neg if not p.get("s2_id") and p.get("doi"))
+            if _n_missing:
+                _n_resolved = enrich_s2_ids(client, _pos + _neg)
+                if _n_resolved:
+                    console.print(f"  [green]Resolved {_n_resolved} S2 IDs from DOIs.[/green]")
             _pos_ids = [p["s2_id"] for p in _pos if p.get("s2_id")]
             _neg_ids = [p["s2_id"] for p in _neg if p.get("s2_id")]
             _existing_s2  = {p["s2_id"] for p in _all if p.get("s2_id")}
@@ -986,7 +1011,7 @@ def run(
 
         # ── Step 5: S2 recommendations ─────────────────────────────────────────
         if use_recommend:
-            from litreview.recommend import fetch_s2_recommendations
+            from litreview.recommend import fetch_s2_recommendations, enrich_s2_ids
             from litreview.db import upsert_paper as _upsert_paper
             _all = get_papers(client, project_id)
             _pos = sorted(
@@ -994,6 +1019,11 @@ def run(
                 key=lambda p: p.get("depth", 0), reverse=True,
             )
             _neg = [p for p in _all if p.get("inclusion_status") == "excluded"]
+            _n_missing = sum(1 for p in _pos + _neg if not p.get("s2_id") and p.get("doi"))
+            if _n_missing:
+                _n_resolved = enrich_s2_ids(client, _pos + _neg)
+                if _n_resolved:
+                    console.print(f"  [green]Resolved {_n_resolved} S2 IDs from DOIs.[/green]")
             _pos_ids = [p["s2_id"] for p in _pos if p.get("s2_id")]
             _neg_ids = [p["s2_id"] for p in _neg if p.get("s2_id")]
             _existing_s2  = {p["s2_id"] for p in _all if p.get("s2_id")}

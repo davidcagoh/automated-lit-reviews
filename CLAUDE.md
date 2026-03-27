@@ -60,9 +60,11 @@ litreview traverse --config ... --from-depth 1              # traverse from dept
 
 # Screen all pending papers
 # Backends: gemini (default), groq, openrouter, anthropic
+# Recommended: --backend groq (llama-3.3-70b-versatile default — best accuracy in tournament)
 litreview screen --config projects/.../project.toml
+litreview screen --config ... --backend groq                 # llama-3.3-70b-versatile default (best accuracy)
+litreview screen --config ... --backend groq --model openai/gpt-oss-20b  # fastest/cheapest groq model
 litreview screen --config ... --backend anthropic --model claude-haiku-4-5-20251001
-litreview screen --config ... --backend groq                 # llama-3.3-70b-versatile default
 litreview screen --config ... --backend openrouter           # qwen/qwen3-30b-a3b:free default
 litreview screen --config ... --backend gemini,groq          # comma-separated = probe both, use fastest, auto-failover
 litreview screen --config ... --dry-run                     # prints decisions, nothing written
@@ -71,6 +73,12 @@ litreview screen --config ... --rate-sleep 0.5              # override rate limi
 litreview screen --config ... --include-uncertain           # clears UNCERTAIN: prefix for a clean re-screen
 litreview screen --config ... --non-interactive             # never prompt on failure — auto-switch or raise
 litreview screen --config ... --yes                        # skip large-batch confirmation (>200 papers)
+
+# QA check after screening: stratified sample re-checked with Claude Haiku (Anthropic)
+# Stops with exit code 2 and prints disagreements if agreement < threshold
+# If ANTHROPIC_API_KEY is not set, dumps sample to /tmp for in-chat QA instead
+litreview screen --config ... --qa                          # default: 75-paper sample, 90% threshold
+litreview screen --config ... --qa --qa-sample 50 --qa-threshold 0.85
 
 # Fetch semantically similar papers via S2 Recommendations API (SPECTER2)
 # Uses included papers as positives, excluded as negatives → upserts source='search' candidates
@@ -253,15 +261,19 @@ OpenAlex IDs are resolved on-the-fly for papers that don't have one yet. Rate-li
 Groq paid throughput is TPS-limited in sequential mode (not RPM-limited — 1K RPM cap is not reached). On paid, use `--rate-sleep 0`. The screener prints an upfront ETA before starting and prompts for confirmation on batches >200 papers. Use `--yes` to skip, `--limit N` to cap a single run.
 
 **Groq model priority** (set with `--model`):
-1. `openai/gpt-oss-20b` — default; fastest + cheapest for bulk screening
-2. `meta-llama/llama-4-scout-17b-16e-instruct` — better quality/cost balance
-3. `llama-3.1-8b-instant` — cheapest; test JSON reliability against your criteria before bulk use
-4. `llama-3.3-70b-versatile` — highest quality; use when comparing screening decisions or validating ground truth
+1. `llama-3.3-70b-versatile` — **default**; best accuracy (~100% oracle agreement in tournament)
+2. `meta-llama/llama-4-scout-17b-16e-instruct` — good quality/cost balance
+3. `openai/gpt-oss-20b` — fastest + cheapest; lower accuracy (91% vs 100% in tournament)
+4. `llama-3.1-8b-instant` — cheapest; test JSON reliability against your criteria before bulk use
+
+**QA loop** (`--qa` flag on `screen`): after bulk screening, re-checks a stratified sample (default 75 papers, 30% includes / 70% excludes) with Claude Haiku (Anthropic). If agreement < threshold (default 90%), prints disagreements grouped by direction and exits with code 2. **Re-running QA without refining criteria produces the same result** — the loop must include a criteria update step, not just a re-screen.
+
+If `ANTHROPIC_API_KEY` is not set, `--qa` writes the sample to `/tmp/qa_sample_<id>.json` and prints instructions for in-chat QA (read the file, make decisions in chat, compare manually).
 
 **Screening strategy tiers** (use in order as batch size and throttling warrant):
-1. **Probe + single backend**: `litreview screen --config ... --backend gemini` — simplest; use when quota is available
-2. **Multi-backend failover**: `litreview screen --config ... --backend gemini,groq` — automatic rotation if one backend hits limits
-3. **Agent in-chat screening**: for ≤~100 remaining papers, read all titles/abstracts directly and write decisions to the DB via a Python script — bypasses all API rate limits entirely and gives instant feedback. Example script pattern:
+1. **Probe + single backend**: `litreview screen --config ... --backend groq` — recommended default
+2. **Multi-backend failover**: `litreview screen --config ... --backend groq,gemini` — automatic rotation if one backend hits limits
+3. **Agent in-chat screening**: for ≤~100 remaining papers, read all titles/abstracts directly and write decisions to the DB via a Python script — bypasses all API rate limits entirely and gives instant feedback. Also the QA method when ANTHROPIC_API_KEY is not available. Example script pattern:
    ```python
    from litreview.db import get_client, get_papers, update_paper_screening
    client = get_client()
@@ -276,6 +288,8 @@ Groq paid throughput is TPS-limited in sequential mode (not RPM-limited — 1K R
 - Returns up to 500 candidates upserted as `source='search'` at `frontier_depth + 1`
 
 The signal sharpens over rounds as more papers are included/excluded. Papers from parallel research communities unreachable via citation links are the primary target. Requires `SEMANTIC_SCHOLAR_API_KEY` — the free tier is heavily rate-limited and may fail for large corpora.
+
+`enrich_s2_ids(client, papers)` — called automatically before `fetch_s2_recommendations()` in `recommend`, `iterate`, and `run`. Resolves missing S2 IDs for papers that have a DOI but no `s2_id` (common for OpenAlex-sourced traversal papers), via S2 batch lookup. Patches the paper list in-place and updates the DB. Papers without S2 IDs are silently excluded from positives/negatives if this step is skipped.
 
 ### Audit (`audit.py`)
 

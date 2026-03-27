@@ -26,9 +26,56 @@ from .models import Paper
 
 logger = logging.getLogger(__name__)
 
-_S2_RECO_URL = "https://api.semanticscholar.org/recommendations/v1/papers"
-_MAX_POSITIVE = 100   # S2 API hard limit
-_MAX_NEGATIVE = 100   # S2 API hard limit
+_S2_RECO_URL   = "https://api.semanticscholar.org/recommendations/v1/papers"
+_S2_BATCH_URL  = "https://api.semanticscholar.org/graph/v1/paper/batch"
+_MAX_POSITIVE  = 100   # S2 API hard limit
+_MAX_NEGATIVE  = 100   # S2 API hard limit
+_BATCH_CHUNK   = 500   # S2 batch lookup limit per request
+
+
+def enrich_s2_ids(client, papers: list[dict]) -> int:
+    """
+    Resolve missing S2 IDs for papers that have a DOI but no s2_id.
+
+    Calls S2's batch paper lookup API (DOI: prefix), updates the DB in-place,
+    and patches the *papers* list so the caller can use the returned s2_ids
+    immediately without re-fetching.
+
+    Returns the number of newly resolved IDs.
+    """
+    missing = [p for p in papers if not p.get("s2_id") and p.get("doi")]
+    if not missing:
+        return 0
+
+    resolved = 0
+    for i in range(0, len(missing), _BATCH_CHUNK):
+        chunk = missing[i : i + _BATCH_CHUNK]
+        ids = [f"DOI:{p['doi']}" for p in chunk]
+        try:
+            resp = httpx.post(
+                _S2_BATCH_URL,
+                headers=_s2_headers(),
+                json={"ids": ids},
+                params={"fields": "paperId"},
+                timeout=30,
+            )
+            resp.raise_for_status()
+            items = resp.json()
+        except Exception as e:
+            logger.warning("S2 batch ID lookup failed (chunk %d): %s", i // _BATCH_CHUNK, e)
+            continue
+
+        for paper, item in zip(chunk, items):
+            if item and item.get("paperId"):
+                s2_id = item["paperId"]
+                paper["s2_id"] = s2_id  # patch in-place so caller sees updated value
+                try:
+                    client.table("papers").update({"s2_id": s2_id}).eq("paper_id", paper["paper_id"]).execute()
+                    resolved += 1
+                except Exception as e:
+                    logger.debug("Failed to update s2_id for %s: %s", paper.get("paper_id"), e)
+
+    return resolved
 
 
 def _s2_is_retryable(exc: BaseException) -> bool:

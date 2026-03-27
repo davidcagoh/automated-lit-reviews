@@ -13,6 +13,12 @@ errors on the current one, and print a live progress summary every _CHUNK_SIZE p
 
 Uncertain papers stay 'pending' with reasoning stored in rejection_reason
 prefixed by "UNCERTAIN: " for human review.
+
+QA loop (screen_project with qa=True):
+  After bulk screening, a stratified sample of recently-screened papers is re-checked
+  with Claude Haiku (Anthropic). If agreement < qa_threshold, disagreements are printed
+  and the run stops — the caller should refine criteria and re-screen before continuing.
+  Recommended: qa_sample=75, qa_threshold=0.90.
 """
 from __future__ import annotations
 
@@ -34,11 +40,11 @@ _GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/openai/chat/
 _OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Groq model priority (paid tier, --rate-sleep 0 recommended):
-#   openai/gpt-oss-20b                       — fastest + cheapest ($0.077/1k papers)
+#   llama-3.3-70b-versatile                  — default; best accuracy (~100% oracle agreement)
 #   meta-llama/llama-4-scout-17b-16e-instruct — good quality/speed balance ($0.10/1k)
+#   openai/gpt-oss-20b                       — fastest + cheapest ($0.077/1k), lower accuracy
 #   llama-3.1-8b-instant                     — cheapest ($0.037/1k), test JSON reliability first
-#   llama-3.3-70b-versatile                  — highest quality, 11x more expensive
-_DEFAULT_GROQ_MODEL       = "openai/gpt-oss-20b"
+_DEFAULT_GROQ_MODEL       = "llama-3.3-70b-versatile"
 _DEFAULT_GEMINI_MODEL     = "gemini-2.5-flash"
 _DEFAULT_OPENROUTER_MODEL = "qwen/qwen3-30b-a3b:free"
 _DEFAULT_ANTHROPIC_MODEL  = "claude-haiku-4-5-20251001"
@@ -545,3 +551,171 @@ def screen_project(
         )
 
     return counts
+
+
+# ── QA sampling ───────────────────────────────────────────────────────────────
+
+def qa_screen(
+    client: Any,
+    project_id: str,
+    screening_round: int,
+    sample_size: int = 75,
+    threshold: float = 0.90,
+    qa_model: str = _DEFAULT_ANTHROPIC_MODEL,
+) -> dict:
+    """
+    Quality-check a stratified sample of papers screened in *screening_round*
+    by re-screening them with Claude Haiku (Anthropic) and comparing decisions.
+
+    Sampling strategy: 30% from includes, 70% from excludes — overweights borderline
+    includes where calibration errors matter most.
+
+    Returns a dict:
+      {
+        "agreement": float,          # fraction of matched decisions
+        "total_sampled": int,
+        "disagreements": [           # list of disagreement dicts
+          {"title": ..., "bulk_decision": ..., "qa_decision": ..., "qa_reasoning": ...}
+        ],
+        "passed": bool,              # agreement >= threshold
+      }
+
+    If 'passed' is False, the caller should print disagreements, refine criteria,
+    and re-screen before proceeding — re-running QA without criteria changes will
+    produce the same result.
+    """
+    import random
+    from .db import get_current_criteria
+    from rich.console import Console
+
+    console = Console()
+
+    criteria_version, criteria_content = get_current_criteria(client, project_id)
+
+    # Fetch all papers screened in this round (included + excluded, not seeds)
+    included = (
+        client.table("papers")
+        .select("paper_id, title, abstract, inclusion_status")
+        .eq("project_id", project_id)
+        .eq("screening_round", screening_round)
+        .eq("inclusion_status", "included")
+        .neq("source", "seed")
+        .execute()
+        .data or []
+    )
+    excluded = (
+        client.table("papers")
+        .select("paper_id, title, abstract, inclusion_status")
+        .eq("project_id", project_id)
+        .eq("screening_round", screening_round)
+        .eq("inclusion_status", "excluded")
+        .neq("source", "seed")
+        .execute()
+        .data or []
+    )
+
+    # Stratified sample: 30% includes, 70% excludes (proportional to their relative importance)
+    n_inc = min(round(sample_size * 0.30), len(included))
+    n_exc = min(sample_size - n_inc, len(excluded))
+    sample = random.sample(included, n_inc) + random.sample(excluded, n_exc)
+    random.shuffle(sample)
+
+    if not sample:
+        console.print("[yellow]QA: no papers to sample from this screening round.[/yellow]")
+        return {"agreement": 1.0, "total_sampled": 0, "disagreements": [], "passed": True}
+
+    console.print(
+        f"\n[bold cyan]QA check[/bold cyan] | "
+        f"sample={len(sample)} ({n_inc} incl + {n_exc} excl) | "
+        f"threshold={threshold:.0%} | model={qa_model}"
+    )
+
+    api_key = settings.anthropic_api_key
+    if not api_key:
+        # No API key: dump sample for in-chat QA instead of calling the API
+        import json, tempfile, os
+        out_path = os.path.join(tempfile.gettempdir(), f"qa_sample_{project_id[:8]}.json")
+        with open(out_path, "w") as f:
+            json.dump(
+                [
+                    {
+                        "title": p["title"],
+                        "abstract": p.get("abstract"),
+                        "bulk_decision": "include" if p["inclusion_status"] == "included" else "exclude",
+                    }
+                    for p in sample
+                ],
+                f, indent=2,
+            )
+        console.print(
+            f"\n[yellow]ANTHROPIC_API_KEY not set — cannot run automated QA.[/yellow]\n"
+            f"Sample written to: [bold]{out_path}[/bold]\n\n"
+            f"To QA in-chat, ask Claude Code:\n"
+            f'  "Read {out_path} and screen each paper against the current criteria '
+            f"for project '{project_id}', then write your decisions to "
+            f"/tmp/qa_decisions_{project_id[:8]}.json and compare against bulk_decision.\""
+        )
+        return {"agreement": None, "total_sampled": len(sample), "disagreements": [], "passed": None}
+
+    agreed = 0
+    disagreements = []
+
+    for i, paper in enumerate(sample):
+        title = paper["title"]
+        abstract = paper.get("abstract")
+        bulk_decision = "include" if paper["inclusion_status"] == "included" else "exclude"
+
+        try:
+            result = screen_paper(title, abstract, criteria_content, backend="anthropic", model=qa_model)
+            qa_decision = result["decision"]
+            qa_reasoning = result["reasoning"]
+        except Exception as e:
+            console.print(f"  [{i+1}/{len(sample)}] QA ERROR: {e}")
+            continue
+
+        match = (
+            (bulk_decision == "include" and qa_decision == "include") or
+            (bulk_decision == "exclude" and qa_decision in ("exclude", "uncertain"))
+        )
+        if match:
+            agreed += 1
+        else:
+            disagreements.append({
+                "title": title,
+                "bulk_decision": bulk_decision,
+                "qa_decision": qa_decision,
+                "qa_reasoning": qa_reasoning,
+            })
+        console.print(
+            f"  [{i+1:02d}/{len(sample)}] bulk={bulk_decision:<8} qa={qa_decision:<8} "
+            f"{'✓' if match else '✗'} {title[:55]}"
+        )
+        time.sleep(0.5)  # Haiku rate limit
+
+    agreement = agreed / len(sample) if sample else 1.0
+    passed = agreement >= threshold
+
+    console.print(
+        f"\n[bold]QA result:[/bold] {agreed}/{len(sample)} agreed "
+        f"({agreement:.0%}) — {'[green]PASSED ✓[/green]' if passed else '[red]FAILED ✗[/red]'} "
+        f"(threshold {threshold:.0%})"
+    )
+
+    if not passed and disagreements:
+        console.print("\n[bold red]Disagreements (bulk vs QA):[/bold red]")
+        for d in disagreements:
+            direction = f"bulk={d['bulk_decision']} → qa={d['qa_decision']}"
+            console.print(f"  [{direction}] {d['title'][:70]}")
+            console.print(f"    QA reasoning: {d['qa_reasoning']}")
+        console.print(
+            "\n[yellow]Action required:[/yellow] Review disagreements above, refine criteria "
+            "in the DB (db.upsert_criteria), reset-screening, and re-screen. "
+            "Re-running QA without criteria changes will produce the same result."
+        )
+
+    return {
+        "agreement": agreement,
+        "total_sampled": len(sample),
+        "disagreements": disagreements,
+        "passed": passed,
+    }
