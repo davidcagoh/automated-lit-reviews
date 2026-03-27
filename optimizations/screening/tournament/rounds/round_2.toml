@@ -1,0 +1,32 @@
+[tournament]
+round   = 2
+project = "language-robotic-control"
+# Round 1 result: all contestants at 63% agreement / 100% FNR — always-exclude collapse.
+# Root cause: v1_baseline gave no default-include signal; exclusion list over-triggered.
+# Round 2: test v2_include_by_default prompt on top models from each tier.
+# Hypothesis: adding DEFAULT RULE + TIEBREAKER will recover FNR without sacrificing precision.
+
+# Contestants: groq-llama70b (best quality on lrc per prior use), groq-llama4scout
+# (fastest groq), gemini-flash (fastest overall, cheapest). Dropping llama8b (same
+# failure mode as others, higher cost per paper than llama4scout for worse quality).
+
+[[contestant]]
+id         = "groq-llama70b-v2"
+backend    = "groq"
+model      = "llama-3.3-70b-versatile"
+prompt     = "v2_include_by_default"
+rate_sleep = 3.0
+
+[[contestant]]
+id         = "groq-llama4scout-v2"
+backend    = "groq"
+model      = "meta-llama/llama-4-scout-17b-16e-instruct"
+prompt     = "v2_include_by_default"
+rate_sleep = 2.0
+
+[[contestant]]
+id         = "gemini-flash-v2"
+backend    = "gemini"
+model      = "gemini-2.5-flash"
+prompt     = "v2_include_by_default"
+rate_sleep = 0.2

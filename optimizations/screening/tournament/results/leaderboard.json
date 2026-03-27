@@ -1,0 +1,58 @@
+[
+  {
+    "round": 1,
+    "contestant_id": "groq-llama70b",
+    "backend": "groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt": "v1_baseline",
+    "agreement": 0.6316,
+    "false_negative_rate": 1.0,
+    "mean_latency_s": 0.667,
+    "est_cost_usd": 46.6527,
+    "cost_per_1k_papers": 409.2342,
+    "n_matched": 114,
+    "dry_run": false
+  },
+  {
+    "round": 1,
+    "contestant_id": "groq-llama8b",
+    "backend": "groq",
+    "model": "llama-3.1-8b-instant",
+    "prompt": "v1_baseline",
+    "agreement": 0.6316,
+    "false_negative_rate": 1.0,
+    "mean_latency_s": 0.436,
+    "est_cost_usd": 4.0652,
+    "cost_per_1k_papers": 35.6593,
+    "n_matched": 114,
+    "dry_run": false
+  },
+  {
+    "round": 1,
+    "contestant_id": "groq-llama4scout",
+    "backend": "groq",
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "prompt": "v1_baseline",
+    "agreement": 0.6316,
+    "false_negative_rate": 1.0,
+    "mean_latency_s": 0.511,
+    "est_cost_usd": 9.5558,
+    "cost_per_1k_papers": 83.8232,
+    "n_matched": 114,
+    "dry_run": false
+  },
+  {
+    "round": 1,
+    "contestant_id": "gemini-flash",
+    "backend": "gemini",
+    "model": "gemini-2.5-flash",
+    "prompt": "v1_baseline",
+    "agreement": 0.6316,
+    "false_negative_rate": 1.0,
+    "mean_latency_s": 3.297,
+    "est_cost_usd": 14.7276,
+    "cost_per_1k_papers": 129.1895,
+    "n_matched": 114,
+    "dry_run": false
+  }
+]
