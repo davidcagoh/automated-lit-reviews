@@ -29,14 +29,17 @@ from litreview.screen import (
     _OPENROUTER_URL,
 )
 
-# ── Cost table (USD per 1K tokens, update when prices change) ─────────────────
-# Format: "backend/model" → (input_per_1k, output_per_1k)
-COST_PER_1K: dict[str, tuple[float, float]] = {
+# ── Cost table (USD per 1M tokens, update when prices change) ─────────────────
+# Format: "backend/model" → (input_per_1m, output_per_1m)
+# Groq: https://groq.com/pricing  Gemini: https://ai.google.dev/pricing
+COST_PER_1M: dict[str, tuple[float, float]] = {
     "groq/llama-3.3-70b-versatile":                    (0.59, 0.79),
     "groq/llama-3.1-8b-instant":                       (0.05, 0.08),
     "groq/meta-llama/llama-4-scout-17b-16e-instruct":  (0.11, 0.34),
     "gemini/gemini-2.5-flash":                         (0.15, 0.60),
 }
+# Keep old name as alias for backwards compatibility with metrics.py import
+COST_PER_1K = COST_PER_1M
 
 # ── Optimal rate sleeps (seconds between calls) ───────────────────────────────
 # Based on Developer plan limits at ~600 tokens/call.
@@ -199,7 +202,7 @@ def screen_paper_instrumented(
     # Cost estimate
     cost_key = f"{backend}/{model}"
     prices = COST_PER_1K.get(cost_key, (0.0, 0.0))
-    est_cost = input_tokens / 1000 * prices[0] + output_tokens / 1000 * prices[1]
+    est_cost = input_tokens / 1_000_000 * prices[0] + output_tokens / 1_000_000 * prices[1]
 
     return {
         "decision":     decision,
