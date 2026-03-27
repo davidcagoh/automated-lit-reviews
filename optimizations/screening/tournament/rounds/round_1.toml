@@ -1,0 +1,41 @@
+[tournament]
+round   = 1
+project = "geometry-testing-simplicial-complexes"
+# test papers loaded from candidate_test_set.json; ground truth from ground_truth.json
+# criteria is read at runtime from the DB (current version)
+
+# ── Contestants ───────────────────────────────────────────────────────────────
+# Rate sleeps are set to the per-model optimal based on Developer plan limits
+# at ~600 tokens/call:
+#   llama-3.3-70b: TPM-bound (12K TPM / 600 = 20 calls/min → 3.0s)
+#   llama-3.1-8b:  TPM-bound (6K TPM  / 600 = 10 calls/min → 6.0s)
+#   llama-4-scout: RPM-bound (30 RPM               → 2.0s)
+#   gemini-flash:  RPM-bound (300 RPM paid Tier 1  → 0.2s) — override via --gemini-tier
+
+[[contestant]]
+id         = "groq-llama70b"
+backend    = "groq"
+model      = "llama-3.3-70b-versatile"
+prompt     = "v1_baseline"
+rate_sleep = 3.0
+
+[[contestant]]
+id         = "groq-llama8b"
+backend    = "groq"
+model      = "llama-3.1-8b-instant"
+prompt     = "v1_baseline"
+rate_sleep = 6.0
+
+[[contestant]]
+id         = "groq-llama4scout"
+backend    = "groq"
+model      = "meta-llama/llama-4-scout-17b-16e-instruct"
+prompt     = "v1_baseline"
+rate_sleep = 2.0
+
+[[contestant]]
+id         = "gemini-flash"
+backend    = "gemini"
+model      = "gemini-2.5-flash"
+prompt     = "v1_baseline"
+rate_sleep = 0.2

@@ -51,7 +51,7 @@ _DEFAULT_ANTHROPIC_MODEL  = "claude-haiku-4-5-20251001"
 
 # Seconds to sleep between calls per backend (stay under rate limits)
 _RATE_SLEEP = {
-    "groq":       1.2,   # ~30 RPM free tier
+    "groq":       2.0,   # paid Developer plan: 30 RPM / 12K TPM for llama-3.3-70b-versatile (~2.5s/paper TPM-limited)
     "gemini":     2.0,   # paid tier, ~30 RPM to avoid burst 429s
     "openrouter": 6.0,   # conservative; free models vary
     "anthropic":  0.5,

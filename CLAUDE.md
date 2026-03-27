@@ -228,7 +228,7 @@ OpenAlex IDs are resolved on-the-fly for papers that don't have one yet. Rate-li
 
 `screen_project()` iterates all `pending` papers, calling the configured LLM for each:
 - **Gemini** (default): OpenAI-compatible endpoint; default model `gemini-2.5-flash`; 2.0 s/paper on paid tier (~30 RPM sustainable). Free tier is 4.5 s/paper but has burst-then-throttle behavior — prefer paid for large batches. Use `--rate-sleep 0.5` on high-quota paid tiers.
-- **GROQ**: OpenAI-compatible API, default model `openai/gpt-oss-20b`; free tier has a daily token quota (~100 papers/day empirically). Paid tier: 1K RPM limit but TPS is the actual bottleneck in sequential mode — use `--rate-sleep 0` and expect ~136 papers/30s on gpt-oss-20b.
+- **GROQ**: OpenAI-compatible API, default model `llama-3.3-70b-versatile`; free tier has a daily token quota (~100 papers/day empirically). Paid Developer plan: 30 RPM / 12K TPM for llama-3.3-70b-versatile — TPM is the binding constraint (~2.5s/paper at ~500 tokens/call). Use `--rate-sleep 0` only on higher enterprise tiers with lifted limits.
 - **Anthropic**: direct API; default model `claude-haiku-4-5-20251001`; 0.5 s/paper
 - **OpenRouter**: default model `qwen/qwen3-30b-a3b:free`; 6.0 s/paper (conservative; free models vary)
 - System prompt embeds the current criteria; response format is `{"decision": ..., "reasoning": ...}`
@@ -244,21 +244,19 @@ OpenAlex IDs are resolved on-the-fly for papers that don't have one yet. Rate-li
 4. On backend switch, the new backend's rate sleep is applied immediately before the first call.
 5. Progress summary printed every `_CHUNK_SIZE = 50` papers: counts, rate (s/paper), ETA, active backend
 
-**Expected throughput** (sequential single-thread; paid tier with `--rate-sleep 0` where noted):
+**Expected throughput** (sequential single-thread):
 
 | Backend / Model | ~s/paper | Papers/30s | 1k papers | 10k papers | ~Cost/10k |
 |---|---|---|---|---|---|
-| Groq `openai/gpt-oss-20b` (`--rate-sleep 0`) | ~0.22s | **136** | 2.4 min | 24 min | $0.77 |
-| Groq `llama-3.1-8b-instant` (`--rate-sleep 0`) | ~0.24s | **125** | 2.7 min | 27 min | $0.37 |
-| Groq `llama-4-scout-17b-16e-instruct` (`--rate-sleep 0`) | ~0.30s | **100** | 5 min | 50 min | $1.02 |
 | Anthropic Haiku (default sleep) | ~1.1s | 27 | 18 min | 3.1 h | ~$8 |
 | Gemini 2.5 Flash paid (default sleep) | ~2.8s | 10 | 47 min | 7.8 h | ~$0.75 |
-| Groq `llama-3.3-70b-versatile` (`--rate-sleep 0`) | ~0.40s | 75 | 6.7 min | 67 min | $4.20 |
+| Groq `llama-3.3-70b-versatile` (Developer plan, default 2.0s sleep) | ~2.5s | 12 | 42 min | 7 h | $4.20 |
+| Groq `llama-3.3-70b-versatile` (enterprise, `--rate-sleep 0`) | ~0.40s | 75 | 6.7 min | 67 min | $4.20 |
 | Gemini free | ~5.3s | 6 | 88 min | 14.7 h | ~$0 |
 | Groq free (any model) | ~1.5s | 20 | 25 min | *(quota ~100/day)* | ~$0 |
 | OpenRouter free | ~9.0s | 3 | 2.5 h | 25 h | ~$0 |
 
-Groq paid throughput is TPS-limited in sequential mode (not RPM-limited — 1K RPM cap is not reached). On paid, use `--rate-sleep 0`. The screener prints an upfront ETA before starting and prompts for confirmation on batches >200 papers. Use `--yes` to skip, `--limit N` to cap a single run.
+Groq Developer plan limits for `llama-3.3-70b-versatile`: 30 RPM / 12K TPM / 100K TPD. TPM is the binding constraint (~500 tokens/call → ~24 RPM sustainable). Use `--rate-sleep 0` only on enterprise tiers with lifted limits. The screener prints an upfront ETA before starting and prompts for confirmation on batches >200 papers. Use `--yes` to skip, `--limit N` to cap a single run.
 
 **Groq model priority** (set with `--model`):
 1. `llama-3.3-70b-versatile` — **default**; best accuracy (~100% oracle agreement in tournament)
