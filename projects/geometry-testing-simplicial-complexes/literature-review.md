@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Detecting Latent Geometry in Random Graphs and Simplicial Complexes: A Literature Review
 
 ## Overview

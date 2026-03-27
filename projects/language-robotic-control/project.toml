@@ -1,0 +1,103 @@
+[project]
+name = "language-robotic-control"
+
+[seeds]
+identifiers = [
+    "10.1609/aaai.v25i1.7979",    # Tellex et al. — Natural Language Grounding (G³)
+    "10.1016/j.csl.2021.101255",  # Spoken Language Research Directions
+    "10.48550/arXiv.2503.07547",  # LLM integration in robotics
+    "10.48550/arXiv.2507.22933",  # VLM Review
+    "10.1145/3777552",            # Reporting and trust (Matuszek et al.)
+    "10.48550/arXiv.2507.10672",  # VLA review
+]
+
+[criteria]
+v1 = """
+Include if the paper addresses language-based or speech-based interaction with robots and meets at least one of:
+- Discusses human-centered evaluation: cognitive load, task completion time, trust, system legibility, interaction repair, mental models, physical safety, NASA-TLX scores, or user studies
+- Published in an HCI or HRI venue (ACM CHI, ACM/IEEE HRI, ACM THRI, UIST, CSCW, RO-MAN) on natural language, speech, or multimodal human-robot interaction
+- A technical paper (AAAI, ICRA, IROS, NeurIPS, etc.) whose language/speech architecture has documentable implications for user experience, cognitive burden, or interaction design in human-robot settings — even if the human-factors impact is implicit
+- Addresses LLM, VLM, or VLA integration in robotics where evaluation includes human subjects, trust, legibility, or interaction design considerations
+- Multimodal HRI combining language with gaze, gesture, pointing, or social cues to reduce interaction friction or resolve ambiguity
+- Conversational repair, ambiguity resolution, or failure recovery in language-guided robotic systems
+- Safety, transparency, or trust frameworks for language-commanded or autonomous robots
+
+Exclude if:
+- Pure ML/NLP benchmark with no robotic application and no human-factors component
+- Robot perception, mapping, or navigation paper with no language interface and no HCI evaluation
+- Language grounding paper focused purely on computational accuracy (e.g., referring expression datasets) with no user study or HCI framing
+- Dialogue systems or chatbots not connected to robotic control or physical human-robot interaction
+- Industrial automation with no human operators or HCI perspective
+- General NLP or computer vision survey with no HRI connection
+"""
+
+# v2: tightened "implicit HCI implications" clause (too liberal in v1 — models disagreed).
+# Removed "even if the human-factors impact is implicit"; added explicit excludes for
+# linguistics papers and AI explanation papers not in robot settings.
+v2 = """
+Include if the paper addresses language-based or speech-based interaction with robots and meets at least one of:
+- Discusses human-centered evaluation: cognitive load, task completion time, trust, system legibility, interaction repair, mental models, physical safety, NASA-TLX scores, or user studies
+- Published in an HCI or HRI venue (ACM CHI, ACM/IEEE HRI, ACM THRI, UIST, CSCW, RO-MAN) on natural language, speech, or multimodal human-robot interaction
+- A technical paper (AAAI, ICRA, IROS, NeurIPS, etc.) whose language/speech architecture has documentable implications for user experience, cognitive burden, or interaction design in human-robot settings
+- Addresses LLM, VLM, or VLA integration in robotics where evaluation includes human subjects, trust, legibility, or interaction design considerations
+- Multimodal HRI combining language with gaze, gesture, pointing, or social cues to reduce interaction friction or resolve ambiguity
+- Conversational repair, ambiguity resolution, or failure recovery in language-guided robotic systems
+- Safety, transparency, or trust frameworks for language-commanded or autonomous robots
+
+Exclude if:
+- Pure ML/NLP benchmark with no robotic application and no human-factors component
+- Robot perception, mapping, or navigation paper with no language interface and no HCI evaluation
+- Language grounding paper focused purely on computational accuracy (e.g., referring expression datasets) with no user study or HCI framing
+- Dialogue systems or chatbots not connected to robotic control or physical human-robot interaction
+- Industrial automation with no human operators or HCI perspective
+- General NLP or computer vision survey with no HRI connection
+- Linguistics or communication theory paper not explicitly applied to robots or robotic interaction
+- AI explanation or transparency paper evaluated only in non-robotic settings
+"""
+
+# v3 (active): added explicit include clause for language-to-robot-command mapping papers
+# (fixed persistent miss of "Reading between the Lines" by both GPT-OSS-20B and Llama-70B);
+# added "collaborative HRI exploration" and "indoor/assistive/home-service robots with language"
+# as explicit include categories; extended exclude list to match v2 additions.
+# Tournament result: Llama-70B 100% agreement, GPT-OSS-20B 91% agreement.
+v3 = """
+Include if the paper addresses language-based or speech-based interaction with robots and meets at least one of:
+- Discusses human-centered evaluation: cognitive load, task completion time, trust, system legibility, interaction repair, mental models, physical safety, NASA-TLX scores, or user studies
+- Published in an HCI or HRI venue (ACM CHI, ACM/IEEE HRI, ACM THRI, UIST, CSCW, RO-MAN) on natural language, speech, or multimodal human-robot interaction
+- A foundational or applied paper mapping natural language or high-level instructions to robot commands, behaviors, or action sequences — even if human-factors impact is not the primary focus
+- A technical paper (AAAI, ICRA, IROS, NeurIPS, etc.) whose language/speech architecture has documentable implications for user experience, cognitive burden, or interaction design in human-robot settings
+- Addresses LLM, VLM, or VLA integration in robotics where evaluation includes human subjects, trust, legibility, or interaction design considerations
+- Multimodal HRI combining language with gaze, gesture, pointing, or social cues to reduce interaction friction or resolve ambiguity
+- Conversational repair, ambiguity resolution, or failure recovery in language-guided robotic systems
+- Safety, transparency, or trust frameworks for language-commanded or autonomous robots
+- Collaborative human-robot exploration or teamwork where communication (dialogue, speech, natural language) plays a central role
+- Robotic systems for indoor environments, assistive tasks, or home service that involve human-robot cooperation with language or speech interfaces
+
+Exclude if:
+- Pure ML/NLP benchmark with no robotic application and no human-factors component
+- Robot perception, mapping, or navigation paper with no language interface and no HCI evaluation
+- Language grounding paper focused purely on computational accuracy (e.g., referring expression datasets) with no robotic deployment or HCI framing
+- Dialogue systems or chatbots not connected to robotic control or physical human-robot interaction
+- Industrial automation with no human operators or HCI perspective
+- General NLP or computer vision survey with no HRI connection
+- Linguistics or communication theory paper not explicitly applied to robots or robotic interaction
+- AI explanation or transparency paper evaluated only in non-robotic settings (e.g., AI planning tools, recommendation systems)
+"""
+
+# ── Extraction: project-specific fields ──────────────────────────────────────
+
+[[extraction.extra_fields]]
+name = "hci_venue"
+description = "Whether the paper was published in a core HCI/HRI venue (CHI, HRI, THRI, UIST, CSCW, RO-MAN). Return true/false."
+
+[[extraction.extra_fields]]
+name = "paradigm"
+description = "Which of the three evolutionary paradigms this paper primarily belongs to: 'strict_grounding' (early NLP/keyword/G³-era), 'situated_multimodal' (context-aware, repair, LLM-era HRI), or 'vlm_vla' (modern vision-language models/action models). Return the closest fit."
+
+[[extraction.extra_fields]]
+name = "human_eval_metrics"
+description = "List of human-centered evaluation metrics reported (e.g. 'NASA-TLX', 'task completion rate', 'trust survey', 'cognitive load rating', 'interaction repair count'). Return as a list, or empty list if no user study."
+
+[[extraction.extra_fields]]
+name = "hci_finding"
+description = "The single most important human-centered finding or implication, framed in terms of usability trade-offs (e.g. 'high predictability but severe cognitive load due to vocabulary mismatch'). One sentence."
