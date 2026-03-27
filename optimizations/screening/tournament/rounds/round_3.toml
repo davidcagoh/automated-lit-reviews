@@ -1,0 +1,38 @@
+[tournament]
+round   = 3
+project = "language-robotic-control"
+# Round 2 result: v2_include_by_default fixed FNR (0-2%) but caused over-inclusion:
+#   llama70b-v2: 75% agree, 0% FNR, 38% FPR (27 false positives)
+#   llama4scout-v2: 71% agree, 0% FNR, 44% FPR (32 false positives)
+#   gemini-flash-v2: 68% agree, 2% FNR, 46% FPR (33 false positives)
+#
+# Root cause: "DEFAULT RULE: include" + TIEBREAKER overrode exclusion criteria.
+# FP patterns: (1) HRI without language interface (gaze, trust, gestures-only),
+#   (2) NLP papers with implied-not-demonstrated robotic use,
+#   (3) autonomous vehicles without language, (4) pure vision/perception robotics.
+#
+# Round 3: v3_language_primary_gate adds a GATING QUESTION before criteria:
+#   "Is language/speech the PRIMARY interface?" → exclude if no.
+#   Keeps default-include for genuine borderline cases.
+#   Adds explicit FP clarifications.
+
+[[contestant]]
+id         = "groq-llama70b-v3"
+backend    = "groq"
+model      = "llama-3.3-70b-versatile"
+prompt     = "v3_language_primary_gate"
+rate_sleep = 3.0
+
+[[contestant]]
+id         = "groq-llama4scout-v3"
+backend    = "groq"
+model      = "meta-llama/llama-4-scout-17b-16e-instruct"
+prompt     = "v3_language_primary_gate"
+rate_sleep = 2.0
+
+[[contestant]]
+id         = "gemini-flash-v3"
+backend    = "gemini"
+model      = "gemini-2.5-flash"
+prompt     = "v3_language_primary_gate"
+rate_sleep = 0.2

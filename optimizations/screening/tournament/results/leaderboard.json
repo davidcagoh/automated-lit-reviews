@@ -1,5 +1,47 @@
 [
   {
+    "round": 2,
+    "contestant_id": "groq-llama70b-v2",
+    "backend": "groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt": "v2_include_by_default",
+    "agreement": 0.7632,
+    "false_negative_rate": 0.0,
+    "mean_latency_s": 0.583,
+    "est_cost_usd": 67.2853,
+    "cost_per_1k_papers": 590.2218,
+    "n_matched": 114,
+    "dry_run": false
+  },
+  {
+    "round": 2,
+    "contestant_id": "groq-llama4scout-v2",
+    "backend": "groq",
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "prompt": "v2_include_by_default",
+    "agreement": 0.7193,
+    "false_negative_rate": 0.0,
+    "mean_latency_s": 0.453,
+    "est_cost_usd": 13.9047,
+    "cost_per_1k_papers": 121.9711,
+    "n_matched": 114,
+    "dry_run": false
+  },
+  {
+    "round": 2,
+    "contestant_id": "gemini-flash-v2",
+    "backend": "gemini",
+    "model": "gemini-2.5-flash",
+    "prompt": "v2_include_by_default",
+    "agreement": 0.7018,
+    "false_negative_rate": 0.0238,
+    "mean_latency_s": 6.225,
+    "est_cost_usd": 20.2741,
+    "cost_per_1k_papers": 177.8434,
+    "n_matched": 114,
+    "dry_run": false
+  },
+  {
     "round": 1,
     "contestant_id": "groq-llama70b",
     "backend": "groq",
