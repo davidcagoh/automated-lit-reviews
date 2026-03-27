@@ -429,7 +429,7 @@ def screen_project(
     include_uncertain: bool = False,
     interactive: bool = True,
     skip_confirmation: bool = False,
-    batch_size: int = 1,
+    batch_size: int = 10,
 ) -> dict[str, int]:
     """
     Screen all 'pending' papers for *project_id* using the latest criteria.

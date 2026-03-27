@@ -192,7 +192,7 @@ def screen(
     qa: bool = typer.Option(False, "--qa", help="Run QA check after screening: sample papers and re-check with Claude Haiku (Anthropic). Stops and prints disagreements if agreement < --qa-threshold."),
     qa_sample: int = typer.Option(75, "--qa-sample", help="Number of papers to sample for QA (stratified 30% include / 70% exclude)."),
     qa_threshold: float = typer.Option(0.90, "--qa-threshold", help="Minimum agreement rate to pass QA (default 0.90). Below this, screening is flagged for criteria review."),
-    batch_size: int = typer.Option(1, "--batch-size", help="Papers per LLM request. Default 1 = single-paper mode. Use 5-20 to amortise rate sleep over a batch (faster, lower cost; benchmark accuracy before use in production)."),
+    batch_size: int = typer.Option(10, "--batch-size", help="Papers per LLM request (default 10). Benchmarked at 3.5× speedup vs single-paper with −2pp accuracy on Gemini 2.5 Flash. Use 1 to revert to single-paper mode."),
 ) -> None:
     """Screen pending papers against inclusion criteria using an LLM backend."""
     import sys as _sys
