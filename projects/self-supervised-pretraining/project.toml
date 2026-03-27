@@ -78,6 +78,29 @@ Exclude:
 - Optimiser, regularisation, or general deep learning papers without direct audio/SSL connection
 """
 
+v5 = """
+Include if the paper addresses any of:
+- Self-supervised learning (SSL) methodology for audio or speech — masked autoencoders, contrastive learning, self-distillation, predictive coding, or joint-embedding architectures applied to spectrograms or waveforms, where the SSL training objective itself is a central contribution or focus
+- Empirical analysis of SSL pre-training quality for audio/speech: probing, KNN evaluation, linear evaluation, or other representation quality metrics — especially studies that examine *when* SSL works or fails (data scale, corpus diversity, collapse, transfer)
+- Audio/speech transformer architectures (patch-based, spectrogram tokenisation) when used as SSL encoder backbones or studied in the context of SSL pre-training
+- Representation collapse, mode collapse, or training instability in SSL — analysis, detection, or mitigation (centering, EMA schedules, augmentation strategies, architecture choices)
+- Label-efficiency, semi-supervised, or low-resource audio classification where SSL pre-training is the key variable being studied
+- Knowledge distillation or student-teacher self-supervised objectives (DINO-style, EMA teachers) for audio or speech representation learning
+- SSL methods originally developed for vision (MAE, DINO, SimCLR, MoCo, BYOL, BarlowTwins, etc.) that are directly adapted or empirically compared on audio/speech datasets
+
+Exclude:
+- Pure vision SSL papers with no connection to audio, speech, or sound
+- ASR / speech synthesis / speaker verification papers not primarily focused on SSL methodology or representation learning
+- Audio generation, text-to-speech, codec, or audio captioning/retrieval papers. A paper whose primary contribution is a downstream application (captioning, retrieval, generation) is excluded even if it uses or extends CLAP-style contrastive pre-training. A paper whose primary contribution is a new SSL pre-training objective or audio/language alignment architecture is included.
+- Supervised audio classification papers, even if they use transformer architectures
+- Papers that use a pre-trained SSL model only as a frozen feature extractor — if the paper does not study, modify, or analyse the SSL pre-training process itself, it is excluded regardless of domain
+- Domain-specific audio application papers (wildlife/ecoacoustics, medical audio, underwater/hydroacoustic, geophysics/atmospheric sensing, industrial/machinery sounds, animal vocalisation, vehicle/drone signal identification) that apply SSL as a tool without investigating SSL pre-training behaviour
+- Multi-task learning, emotion recognition, or speaker recognition papers without a primary focus on SSL pre-training dynamics
+- Benchmark or evaluation papers that assess models on downstream tasks without proposing or analysing SSL pre-training methodology
+- Survey/review papers on audio or ML generally (unless specifically surveying SSL for audio)
+- Optimiser, regularisation, or general deep learning papers without direct audio/SSL connection
+"""
+
 v4 = """
 Include if the paper addresses any of:
 - Self-supervised learning (SSL) methodology for audio or speech — masked autoencoders, contrastive learning, self-distillation, predictive coding, or joint-embedding architectures applied to spectrograms or waveforms, where the SSL training objective itself is a central contribution or focus

@@ -32,6 +32,10 @@ create table if not exists papers (
     venue             text,
     authors           jsonb,          -- [{name, s2_id, openalex_id}]
 
+    -- Citation counts (from S2 citationCount / OpenAlex cited_by_count)
+    citation_count    int,            -- incoming: how many papers cite this one
+    reference_count   int,            -- outgoing: how many papers this one cites (survey signal)
+
     -- SPECTER2 embedding from Semantic Scholar (dim=768)
     embedding         vector(768),
 

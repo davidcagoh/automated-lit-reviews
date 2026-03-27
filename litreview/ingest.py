@@ -19,7 +19,7 @@ from .models import Author, Paper
 logger = logging.getLogger(__name__)
 
 _S2_BASE = "https://api.semanticscholar.org/graph/v1"
-_S2_FIELDS_BASE = "paperId,externalIds,title,abstract,year,venue,authors"
+_S2_FIELDS_BASE = "paperId,externalIds,title,abstract,year,venue,authors,citationCount,referenceCount"
 _S2_FIELDS_WITH_EMBEDDING = _S2_FIELDS_BASE + ",embedding"
 
 
@@ -69,6 +69,8 @@ def _parse_s2_paper(data: dict) -> Paper:
         venue=data.get("venue"),
         authors=authors,
         embedding=embedding,
+        citation_count=data.get("citationCount"),
+        reference_count=data.get("referenceCount"),
     )
 
 
@@ -177,6 +179,10 @@ def _merge_openalex(paper: Paper, oa_data: dict) -> Paper:
             )
             for a in oa_data.get("authorships", [])
         ]
+    if paper.citation_count is None and oa_data.get("cited_by_count") is not None:
+        paper.citation_count = oa_data["cited_by_count"]
+    if paper.reference_count is None and oa_data.get("referenced_works_count") is not None:
+        paper.reference_count = oa_data["referenced_works_count"]
     return paper
 
 

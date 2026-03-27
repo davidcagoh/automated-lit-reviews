@@ -12,6 +12,7 @@ from __future__ import annotations
 import logging
 import time
 from typing import Any, Literal
+import statistics
 
 from supabase import Client
 
@@ -83,6 +84,8 @@ def _oa_work_to_paper(work: dict) -> Paper | None:
         year=work.get("publication_year"),
         venue=venue,
         authors=authors,
+        citation_count=work.get("cited_by_count"),
+        reference_count=work.get("referenced_works_count"),
     )
 
 
@@ -133,6 +136,24 @@ def _fetch_citing(openalex_id: str, max_results: int = 300) -> list[dict]:
         return []
 
 
+# ── Hub filtering ─────────────────────────────────────────────────────────────
+
+def _hub_threshold(all_papers: list[dict]) -> float | None:
+    """80th-percentile citation_count among included papers.
+
+    Returns None if fewer than 10 included papers have citation counts (not
+    enough signal to set a meaningful threshold).
+    """
+    counts = [
+        p["citation_count"] for p in all_papers
+        if p.get("inclusion_status") == "included" and p.get("citation_count") is not None
+    ]
+    if len(counts) < 10:
+        return None
+    counts.sort()
+    return counts[int(0.8 * len(counts))]
+
+
 # ── Public entry point ────────────────────────────────────────────────────────
 
 def traverse_citations(
@@ -168,6 +189,15 @@ def traverse_citations(
         logger.warning("No papers at depth=%d to traverse from.", from_depth)
         return {"candidates": 0, "papers_upserted": 0, "edges_stored": 0}
 
+    hub_cutoff = _hub_threshold(all_papers)
+    if hub_cutoff is not None:
+        logger.info(
+            "Hub filter active: forward traversal skipped for papers with citation_count > %d (80th pct of included)",
+            int(hub_cutoff),
+        )
+    else:
+        logger.info("Hub filter inactive (fewer than 10 included papers have citation counts).")
+
     logger.info("Traversing from %d papers at depth=%d (direction=%s)", len(starting_set), from_depth, direction)
 
     candidate_works: list[dict] = []           # raw OpenAlex works
@@ -181,6 +211,9 @@ def traverse_citations(
             logger.warning("No OpenAlex ID for '%s'; skipping.", source_paper.get("title", "")[:50])
             continue
 
+        paper_citations = source_paper.get("citation_count") or 0
+        is_hub = hub_cutoff is not None and paper_citations > hub_cutoff
+
         if direction in ("backward", "both"):
             refs = _fetch_references(oa_id)
             logger.info("  ← backward: %d refs from '%s'", len(refs), source_paper["title"][:45])
@@ -190,12 +223,18 @@ def traverse_citations(
             time.sleep(0.5)
 
         if direction in ("forward", "both"):
-            citing = _fetch_citing(oa_id)
-            logger.info("  → forward:  %d citing from '%s'", len(citing), source_paper["title"][:45])
-            for w in citing:
-                candidate_works.append(w)
-                edge_map[w.get("id", "")] = source_id
-            time.sleep(0.5)
+            if is_hub:
+                logger.info(
+                    "  ⊘ hub: '%s' (%d citations) — skipping forward traversal",
+                    source_paper["title"][:45], paper_citations,
+                )
+            else:
+                citing = _fetch_citing(oa_id)
+                logger.info("  → forward:  %d citing from '%s'", len(citing), source_paper["title"][:45])
+                for w in citing:
+                    candidate_works.append(w)
+                    edge_map[w.get("id", "")] = source_id
+                time.sleep(0.5)
 
     # Parse → Paper objects
     parsed: list[Paper] = []

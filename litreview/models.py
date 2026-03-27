@@ -34,6 +34,10 @@ class Paper(BaseModel):
     venue: str | None = None
     authors: list[Author] = Field(default_factory=list)
 
+    # Citation counts
+    citation_count: int | None = None   # incoming: times cited (hub signal)
+    reference_count: int | None = None  # outgoing: references made (survey signal)
+
     # Embedding (SPECTER2, dim 768)
     embedding: list[float] | None = None
 
